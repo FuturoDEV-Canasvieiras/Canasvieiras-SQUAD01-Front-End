@@ -24,6 +24,7 @@ export default function CadastroForm() {
                         <input type="password" name="senha" value={form.senha} onChange={handleChange} /><br />
                         <button type="submit" className="button-form">Cadastrar</button>
                     </form>
+                    <span>Clique {<a href='/'>aqui</a>} para fazer login</span>
                 </div>
             </div>
         </>
