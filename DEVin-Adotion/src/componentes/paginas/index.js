@@ -1,5 +1,8 @@
-import CadastroPagina from "./CadastroPagina/CadastroPagina";
+import CadastroUserPagina from "./CadastroUserPagina/CadastroUserPagina"
+import CadastroProdutoPagina from "./CadastroProdutoPagina/CadastroProdutoPagina"
 
 export {
-    CadastroPagina
+    CadastroUserPagina,
+    CadastroProdutoPagina
+
 }

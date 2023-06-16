@@ -1,6 +1,6 @@
 import { CadastroUserForm } from "../../formularios";
 
-export default function CadastroPagina() {
+export default function CadastroUserPagina() {
     return(
         <CadastroUserForm />
     )
