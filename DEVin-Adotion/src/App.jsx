@@ -1,11 +1,22 @@
 import './App.css'
-import { CadastroUserForm } from './componentes/formularios'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+
+import { CadastroPagina} from './componentes/paginas'
 
 function App() {
   return (
-    <>
-      <CadastroUserForm />
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path='/' element={<Login />} /> */}
+        <Route path='/cadastro_usuario' element={<CadastroPagina />} />
+        {/* <Route path='/dashboard/:id' element={<Dashboard /> } />
+        <Route path='/armazem/lista_produtos' element={<Estoque />} />
+        <Route path='/armazem/cadastro_produtos' element={<EstoqueCadastroPage />} />
+        <Route path='/armazem/:id' element={<Armazem />} />
+        <Route path='*' element={<NotFound />} /> */}
+      </Routes>
+
+    </BrowserRouter>
   )
 }
 
