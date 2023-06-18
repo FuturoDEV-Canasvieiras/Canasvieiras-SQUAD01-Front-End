@@ -1,10 +1,9 @@
-import { LoginFormulario } from "../../formularios"
+import { LoginFormulario } from "../../formularios";
 
 export default function LoginPagina() {
-    return (
-       <div className="login-container"> 
-            <img src=""/>
-            <LoginFormulario />
-        </div>
-    )
+  return (
+    <div className="login-container" id="fundoPaginaLogin">
+      <LoginFormulario />
+    </div>
+  );
 }
