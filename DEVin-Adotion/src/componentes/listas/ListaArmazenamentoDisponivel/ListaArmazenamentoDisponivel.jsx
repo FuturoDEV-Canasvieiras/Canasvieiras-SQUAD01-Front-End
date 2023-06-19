@@ -2,20 +2,25 @@ import { useFetch } from "../../../hooks/useFetch"
 
 export default function ListaArmazenamentoDisponivel() {
     const { itens: armazens } = useFetch("https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/armazens")
-    return (
-        <section>
+    return (<>
+        <table>
+            <tr>
+                <th>Armazém</th>
+                <th>Animal</th>
+            </tr>
             {armazens.map(item => {
                 return (
-                    <list>
-                        <ul>
-                            <p>nome do armazem</p>
-                            {item.armazem}
-                            <p>animal</p>
-                            {item.animal}
-                        </ul>
-                    </list>
+                    <>
+                        <tbody>
+                            <tr>
+                                <td>{item.armazem}</td>
+                                <td>{item.animal}</td>
+                            </tr>
+                        </tbody>
+                    </>
                 )
             })}
-        </section>
+        </table>
+    </>
     )
 }
