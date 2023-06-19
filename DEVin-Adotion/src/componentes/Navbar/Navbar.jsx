@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import CadastroUserPagina from "../paginas/CadastroUserPagina/CadastroUserPagina";
 import LoginPagina from "../paginas/LoginPagina/LoginPagina";
+import Home from "../paginas/Home/Home";
 
 const Login = () => {
   return <LoginPagina />;
@@ -15,7 +16,7 @@ const Navbar = () => {
   return (
     <Router>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success container-fluid">
-        <Link to="/login" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           Dev in Adotion
         </Link>
         <button
