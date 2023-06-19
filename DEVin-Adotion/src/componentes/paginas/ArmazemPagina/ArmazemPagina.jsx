@@ -8,7 +8,6 @@ export default function ArmazemPagina() {
             <CadastroArmazemForm />
             <h2>lista de armazens disponiveis</h2>
             <ListaArmazenamentoDisponivel />
-            
         </>
     )
 }
