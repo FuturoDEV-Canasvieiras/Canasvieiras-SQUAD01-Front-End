@@ -1,7 +1,9 @@
 import { CadastroUserForm } from "../../formularios";
 
 export default function CadastroUserPagina() {
-    return(
-        <CadastroUserForm />
-    )
+  return (
+    <div id="fundoPaginaCadastroUsuario">
+      <CadastroUserForm />
+    </div>
+  );
 }
