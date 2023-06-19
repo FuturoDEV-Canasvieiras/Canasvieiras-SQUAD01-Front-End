@@ -17,7 +17,11 @@ export default function LoginFormulario() {
         className="d-flex justify-content-center align-items-center"
         style={{ height: "100vh" }}
       >
-        <form onSubmit={handleSubmit} className="col-4" id="FormularioLogin">
+        <form
+          onSubmit={handleSubmit}
+          className="col-4"
+          id="FormularioLoginUsuario"
+        >
           <h1 className="text-center">Login</h1>
           <label htmlFor="email">Endereço de E-mail:</label>
           <br />
@@ -30,7 +34,7 @@ export default function LoginFormulario() {
             placeholder="E-mail"
           />
           <br />
-          <label htmlFor="senha">Senha</label>
+          <label htmlFor="senha">Senha:</label>
           <br />
           <input
             className="form-control"
@@ -41,10 +45,7 @@ export default function LoginFormulario() {
             placeholder="Digite sua senha"
           />
           <br />
-          <button
-            type="submit"
-            className="button-form btn btn-success w-100 my-3"
-          >
+          <button type="submit" className="button-form btn btn-success w-100">
             Entrar
           </button>
           <div className="text-center">
