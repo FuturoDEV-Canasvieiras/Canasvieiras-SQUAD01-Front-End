@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 
-import { CadastroUserPagina, CadastroProdutoPagina, ArmazemPagina } from './componentes/paginas'
+import { CadastroUserPagina, CadastroProdutoPagina, ArmazemPagina, Dashboard } from './componentes/paginas'
 
 function App() {
   return (
@@ -9,8 +9,8 @@ function App() {
       <Routes>
         {/* <Route path='/' element={<Login />} /> */}
         <Route path='/cadastro_usuario' element={<CadastroUserPagina />} />
-        {/* <Route path='/dashboard/:id' element={<Dashboard /> } />
-        <Route path='/armazem/lista_produtos' element={<Estoque />} /> */}
+        <Route path='/dashboard' element={<Dashboard /> } />
+        {/* <Route path='/armazem/lista_produtos' element={<Estoque />} /> */}
         <Route path='/armazem/cadastro_produtos' element={<CadastroProdutoPagina />} />
         <Route path='/armazem' element={<ArmazemPagina />} />
         {/* <Route path='*' element={<NotFound />} /> */}
