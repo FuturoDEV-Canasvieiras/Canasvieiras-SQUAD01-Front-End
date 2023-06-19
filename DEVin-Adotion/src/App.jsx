@@ -1,8 +1,14 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { CadastroUserPagina, CadastroProdutoPagina, LoginPagina } from "./componentes/paginas";
-import Navbar from "./componentes/Navbar/Navbar.jsx";
+import {
+  CadastroUserPagina,
+  CadastroProdutoPagina,
+  LoginPagina,
+  Home,
+  Error,
+  Navbar,
+} from "./componentes/paginas";
 
 function App() {
   return (
