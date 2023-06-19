@@ -3,8 +3,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
+import { DevAdotionProvider } from './context/devAdotionContext.jsx'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+
+    <DevAdotionProvider>
+      <App />
+    </DevAdotionProvider>
+
   </React.StrictMode>,
 )
