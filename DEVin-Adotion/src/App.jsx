@@ -6,12 +6,13 @@ import {
   CadastroProdutoPagina,
   LoginPagina,
   Home,
+  Error,
   Navbar,
 } from "./componentes/paginas";
 
 function App() {
   return (
-    <Home />
+    <Navbar />
     // <BrowserRouter>
     //   <Routes>
     //     <Route path="/" element={<LoginPagina />} />

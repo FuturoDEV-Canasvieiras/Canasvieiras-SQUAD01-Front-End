@@ -2,7 +2,16 @@ import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import CadastroUserPagina from "../paginas/CadastroUserPagina/CadastroUserPagina";
 import LoginPagina from "../paginas/LoginPagina/LoginPagina";
+import Error from "../paginas/Error/Error";
 import Home from "../paginas/Home/Home";
+
+const PaginaPrincipal = () => {
+  return <Home />;
+};
+
+const PaginaErro = () => {
+  return <Error />;
+};
 
 const Login = () => {
   return <LoginPagina />;
@@ -48,8 +57,10 @@ const Navbar = () => {
 
       <div className="container mt-4">
         <Routes>
+          <Route path="/" element={<PaginaPrincipal />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
+          <Route path="/*" element={<PaginaErro />} />
         </Routes>
       </div>
     </Router>
