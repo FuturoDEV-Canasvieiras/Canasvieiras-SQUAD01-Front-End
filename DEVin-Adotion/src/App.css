@@ -1,17 +1,5 @@
-#FormularioLoginUsuario {
-  background-color: white;
-  padding: 30px;
-}
-
+#FormularioLoginUsuario,
 #FormularioCadastroUsuario {
   background-color: white;
   padding: 30px;
 }
-
-/* #fundoPaginaLogin {
-  background-image: url(./imagens/fundo_login.jpg);
-}
-
-#fundoPaginaCadastroUsuario {
-  background-image: url(./imagens/fundo_login.jpg);
-} */
