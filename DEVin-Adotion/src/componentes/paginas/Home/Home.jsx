@@ -3,7 +3,10 @@ import Navbar from "../../Navbar/Navbar";
 
 const Home = () => {
   return (
-    <div>
+    <div className="pagina-principal">
+      <header>
+        <h1>Tudo que sua ONG precisa!</h1>
+      </header>
       <h1 className="mt-5">LAB Cat&amp;Dog</h1>
       <h2 className="mb-4">Desenvolvimento de Aplicações</h2>
       <div className="row">

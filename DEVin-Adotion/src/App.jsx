@@ -8,11 +8,15 @@ import {
   Home,
   Error,
   Navbar,
+  ArmazemPagina,
 } from "./componentes/paginas";
 
 function App() {
   return (
-    <Navbar />
+    <div>
+      <Navbar />
+    </div>
+
     // <BrowserRouter>
     //   <Routes>
     //     <Route path="/" element={<LoginPagina />} />
