@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import CadastroUserPagina from "../paginas/CadastroUserPagina/CadastroUserPagina";
 import LoginPagina from "../paginas/LoginPagina/LoginPagina";
+import ArmazemPagina from "../paginas/ArmazemPagina/ArmazemPagina";
 import Error from "../paginas/Error/Error";
 import Home from "../paginas/Home/Home";
 
@@ -19,6 +20,10 @@ const Login = () => {
 
 const CadastroUsuario = () => {
   return <CadastroUserPagina />;
+};
+
+const PaginaArmazen = () => {
+  return <ArmazenPagina />;
 };
 
 const Navbar = () => {
@@ -61,6 +66,7 @@ const Navbar = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
           <Route path="/*" element={<PaginaErro />} />
+          <Route path="/armazem-pagina" element={<PaginaArmazem />} />
         </Routes>
       </div>
     </Router>
