@@ -5,6 +5,9 @@ import LoginPagina from "../paginas/LoginPagina/LoginPagina";
 import ArmazemPagina from "../paginas/ArmazemPagina/ArmazemPagina";
 import Error from "../paginas/Error/Error";
 import Home from "../paginas/Home/Home";
+import Dashboard from "../paginas/Dashboard/Dashboard";
+import { CadastroProdutoForm } from "../formularios";
+import { CadastroProdutoPagina } from "../paginas";
 
 const PaginaPrincipal = () => {
   return <Home />;
@@ -22,9 +25,17 @@ const CadastroUsuario = () => {
   return <CadastroUserPagina />;
 };
 
-const PaginaArmazen = () => {
-  return <ArmazenPagina />;
+const PaginaArmazem = () => {
+  return <ArmazemPagina />;
 };
+
+const PaginaDashboard = () => {
+  return <Dashboard />;
+}
+
+const PaginaCadastroProduto = () => {
+  return <CadastroProdutoPagina />
+}
 
 const Navbar = () => {
   return (
@@ -56,6 +67,16 @@ const Navbar = () => {
                 Cadastrar
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/dashboard" className="nav-link">
+                Dashboard
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/cadastro-produtos" className="nav-link">
+                cadastro produtos
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>
@@ -65,6 +86,8 @@ const Navbar = () => {
           <Route path="/" element={<PaginaPrincipal />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
+          <Route path="/dashboard" element={<PaginaDashboard />} />
+          <Route path="/cadastro-produtos" element={<PaginaCadastroProduto />} />
           <Route path="/*" element={<PaginaErro />} />
           <Route path="/armazem-pagina" element={<PaginaArmazem />} />
         </Routes>
