@@ -2,8 +2,8 @@ import { useFetch } from '../../../hooks/useFetch'
 import { useForm } from '../../../hooks/useForm'
 //url do fetch = mockapi pra testes
 export default function CadastroArmazemForm() {
-    const { handleChange, form, resetForm } = useForm({ armazem: "", animal: "", situacao: "" })
-    const { createData } = useFetch("")
+    const { handleChange, form, resetForm } = useForm({ armazem: "", animal: "", situacao: true })
+    const { createData } = useFetch("https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/armazens")
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -19,8 +19,8 @@ export default function CadastroArmazemForm() {
                 <label htmlFor="armazem">Animal:</label><br />
                 <select name="animal" value={form.animal} onChange={handleChange}>
                     <option value="" disabled>Selecione o Estoque</option>
-                    <option value="gato">Gato</option>
-                    <option value="cachorro">Cachorro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Cachorro">Cachorro</option>
                 </select><br />
                 <label htmlFor="situacao">Situação:</label><br />
                 <select name="situacao" value={form.situacao} onChange={handleChange}>

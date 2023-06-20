@@ -8,9 +8,9 @@ import { DevAdotionProvider } from './context/devAdotionContext.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
-    <DevAdotionProvider>
+    {/* <DevAdotionProvider> */}
       <App />
-    </DevAdotionProvider>
+    {/* </DevAdotionProvider> */}
 
   </React.StrictMode>,
 )

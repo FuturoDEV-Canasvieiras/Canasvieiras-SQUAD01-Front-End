@@ -4,7 +4,9 @@ import { Navbar } from "./componentes/paginas";
 
 function App() {
   return (
+    <>
       <Navbar />
+    </>
   );
 }
 

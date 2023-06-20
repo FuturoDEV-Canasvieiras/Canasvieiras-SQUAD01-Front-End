@@ -6,26 +6,28 @@ export default function ArmazemPagina() {
     return (
         <>
             <CadastroArmazemForm />
-            <h2>lista de armazens disponiveis</h2>
+            <h2>Lista de Armazéns</h2>
             <table>
-                <tr>
-                    <th>Armazém</th>
-                    <th>Animal</th>
-                    <th>Situação</th>
-                </tr>
-                {armazens.map(item => {
-                    return (
-                        <>
-                            <tbody>
-                                <tr>
+                <thead>
+                    <tr>
+                        <th>Armazém</th>
+                        <th>Animal</th>
+                        <th>Situação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {armazens.map(item => {
+                        return (
+                            <>
+                                <tr key={item.id}>
                                     <td>{item.armazem}</td>
                                     <td>{item.animal}</td>
-                                    <td>{item.situacao ? 'disponível' : 'indisponível'}</td>
+                                    <td>{item.situacao == true ? 'Disponível' : 'Indisponível'}</td>
                                 </tr>
-                            </tbody>
-                        </>
-                    )
-                })}
+                            </>
+                        )
+                    })}
+                </tbody>
             </table>
         </>
     )

@@ -39,14 +39,15 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <Link to="/cadastro-produtos" className="nav-link">
-                cadastro produtos
+                Cadastro Produtos
               </Link>
-              <li className="nav-item">
+            </li>
+            <li className="nav-item">
               <Link to="/cadastro-armazem" className="nav-link">
-                cadastro armazem
+                Armazém
               </Link>
             </li>
-            </li>
+
           </ul>
         </div>
       </nav>
