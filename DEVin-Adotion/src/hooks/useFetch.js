@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react";
 
+export const fetchLoginData = async (data) => {
+  const response = await fetch("https://login-futurodev.free.beeceptor.com/loginpost", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  const json = await response.json();
+
+  return {...json, success: response.ok};
+};
 export const useFetch = (url) => {
   const [itens, setItens] = useState([]);
 
