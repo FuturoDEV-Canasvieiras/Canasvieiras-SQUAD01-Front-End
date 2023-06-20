@@ -1,21 +1,46 @@
-import { useFetch } from "../../../hooks/useFetch";
-import { useForm } from "../../../hooks/useForm";
+import { useState } from 'react';
+import { useForm } from '../../../hooks/useForm';
+import { useFetch } from '../../../hooks/useFetch';
+
 
 export default function LoginFormulario() {
-  const { handleChange, form, resetForm } = useForm({ email: "", senha: "" });
-  const { getData } = useFetch("");
+  const { handleChange, form, resetForm } = useForm({
+    senha: "",
+    email: "",
+  })
+  const [errorMessage, setErrorMessage] = useState('');
+  const [status, setStatus] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    getData(form);
-    resetForm();
+
+    try {
+      const  { getData } = useFetch("https://login-futurodev.free.beeceptor.com/loginpost")
+      
+
+      if (form.email === getData.email && form.senha === getData.senha) {
+        setStatus('Login bem sucedido!');
+        
+      } else {
+        setStatus('Credenciais inválidas.');
+      }
+    } catch (error) {
+      setStatus('Ocorreu um erro ao processar a solicitação.');
+    }
+
+    resetForm()
+    if (!form.email || !form.senha) {
+      setErrorMessage('Por favor, preencha todos os campos.');
+      return;
+    }
   };
+
 
   return (
     <>
       <div
         className="d-flex justify-content-center align-items-center"
-        style={{ height: "100vh" }}
+        style={{ height: '100vh' }}
       >
         <form
           onSubmit={handleSubmit}
@@ -42,7 +67,7 @@ export default function LoginFormulario() {
             name="senha"
             value={form.senha}
             onChange={handleChange}
-            placeholder="Digite sua senha"
+            placeholder="Digite uma senha"
           />
           <br />
           <button type="submit" className="button-form btn btn-success w-100">
@@ -50,15 +75,17 @@ export default function LoginFormulario() {
           </button>
           <div className="text-center">
             <span>
-              Clique{" "}
+              Clique{' '}
               {
                 <a href="/cadastro_usuario">
                   <strong>aqui</strong>
                 </a>
-              }{" "}
+              }{' '}
               para cadastrar
             </span>
           </div>
+          {errorMessage && <p>{errorMessage}</p>}
+          {status && <p>{status}</p>}
         </form>
       </div>
     </>
