@@ -1,11 +1,18 @@
-import CadastroUserForm from "./CadastroUserForm/CadastroUserForm";
-import CadastroProdutoForm from "./CadastroProdutoForm/CadastroProdutoForm";
-import LoginFormulario from "./LoginFormulario/LoginFormulario";
-import CadastroArmazemForm from "./CadastroArmazemForm/CadastroArmazemForm";
+import CadastroUserPagina from "./CadastroUserPagina/CadastroUserPagina"
+import CadastroProdutoPagina from "./CadastroProdutoPagina/CadastroProdutoPagina"
+import Dashboard from "./Dashboard/Dashboard"
+import LoginPagina from "./LoginPagina/LoginPagina"
+import Navbar from "../Navbar/Navbar"
+import Home from "../paginas/Home/Home"
+import Error from "../paginas/Error/Error"
 
 export {
-    CadastroUserForm,
-    CadastroProdutoForm,
-    CadastroArmazemForm,
-    LoginFormulario
+    CadastroUserPagina,
+    CadastroProdutoPagina,
+    LoginPagina,
+    ArmazemPagina,
+    Navbar,
+    Home,
+    Dashboard,
+    Error
 }

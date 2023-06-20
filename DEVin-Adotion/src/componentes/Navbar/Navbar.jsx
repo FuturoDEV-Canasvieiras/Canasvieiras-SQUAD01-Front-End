@@ -31,16 +31,16 @@ const PaginaArmazem = () => {
 
 const PaginaDashboard = () => {
   return <Dashboard />;
-}
+};
 
 const PaginaCadastroProduto = () => {
-  return <CadastroProdutoPagina />
-}
+  return <CadastroProdutoPagina />;
+};
 
 const Navbar = () => {
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-success container-fluid">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-success container-fluid p-4">
         <Link to="/" className="navbar-brand">
           Dev in Adotion
         </Link>
@@ -87,7 +87,10 @@ const Navbar = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
           <Route path="/dashboard" element={<PaginaDashboard />} />
-          <Route path="/cadastro-produtos" element={<PaginaCadastroProduto />} />
+          <Route
+            path="/cadastro-produtos"
+            element={<PaginaCadastroProduto />}
+          />
           <Route path="/*" element={<PaginaErro />} />
           <Route path="/armazem-pagina" element={<PaginaArmazem />} />
         </Routes>
