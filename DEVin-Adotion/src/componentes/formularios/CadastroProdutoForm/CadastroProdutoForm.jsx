@@ -3,8 +3,39 @@ import { useFetch } from '../../../hooks/useFetch';
 import { useForm } from '../../../hooks/useForm';
 
 export default function CadastroProdutoForm() {
-    const { handleChange, form, resetForm } = useForm({ armazenamento: "", produto: "", quantidade: 0, animal: "", categoria: "" })
-    const { createData } = useFetch('https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/cadastro_produto')
+  const { handleChange, form, resetForm } = useForm({
+    armazem: "",
+    produto: "",
+    quantidade: 0,
+    animal: "",
+    categoria: ""
+  });
+
+  const { createData } = useFetch('https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/cadastro_produto');
+  const { itens: armazens, error } = useFetch('https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/armazens');
+  const [selectedArmazem, setSelectedArmazem] = useState(null);
+
+  useEffect(() => {
+    armazensAbertos();
+  }, []);
+
+  const armazensAbertos = () => {
+    if (!error && armazens) {
+      const armazensDisponiveis = armazens.filter((item) => item.situacao === true);
+      return armazensDisponiveis;
+    }
+    return [];
+  };
+
+  const handleArmazemChange = (event) => {
+    const selectedArmazem = armazens.find((item) => item.armazem === event.target.value);
+    setSelectedArmazem(selectedArmazem);
+    handleChange(event);
+  };
+
+  const handleAnimalChange = (event) => {
+    handleChange(event);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
