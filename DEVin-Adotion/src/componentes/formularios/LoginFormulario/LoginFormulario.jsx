@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from '../../../hooks/useForm';
-import { useFetch } from '../../../hooks/useFetch';
+import { fetchLoginData } from '../../../hooks/useFetch';
 
 
 export default function LoginFormulario() {
@@ -11,28 +11,30 @@ export default function LoginFormulario() {
   const [errorMessage, setErrorMessage] = useState('');
   const [status, setStatus] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleLogin = async () => {
     try {
-      const  { getData } = useFetch("https://login-futurodev.free.beeceptor.com/loginpost")
-      
-
-      if (form.email === getData.email && form.senha === getData.senha) {
+      const response = await fetchLoginData(form);
+      console.log(response)
+      if (response && response.success) {
         setStatus('Login bem sucedido!');
-        
       } else {
         setStatus('Credenciais inválidas.');
       }
     } catch (error) {
-      setStatus('Ocorreu um erro ao processar a solicitação.');
+      setStatus('Ocorreu um erro ao processar a solicitação');
     }
+  };
 
-    resetForm()
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
     if (!form.email || !form.senha) {
       setErrorMessage('Por favor, preencha todos os campos.');
       return;
     }
+
+    handleLogin();
+    resetForm();
   };
 
 
@@ -48,7 +50,8 @@ export default function LoginFormulario() {
           id="FormularioLoginUsuario"
         >
           <h1 className="text-center">Login</h1>
-          <label htmlFor="email">Endereço de E-mail:</label>
+          {errorMessage && <p>{errorMessage}</p>}
+          <label htmlFor="email">E-mail:</label>
           <br />
           <input
             className="form-control"
@@ -84,7 +87,6 @@ export default function LoginFormulario() {
               para cadastrar
             </span>
           </div>
-          {errorMessage && <p>{errorMessage}</p>}
           {status && <p>{status}</p>}
         </form>
       </div>
