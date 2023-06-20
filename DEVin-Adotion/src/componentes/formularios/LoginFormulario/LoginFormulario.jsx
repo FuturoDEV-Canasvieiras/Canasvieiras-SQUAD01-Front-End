@@ -15,11 +15,11 @@ export default function LoginFormulario() {
     <>
       <div
         className="d-flex justify-content-center align-items-center"
-        style={{ height: "100%" }}
+        style={{ height: "100vh" }}
       >
         <form
           onSubmit={handleSubmit}
-          className="col-4 formulario-borda"
+          className="col-4"
           id="FormularioLoginUsuario"
         >
           <h1 className="text-center">Login</h1>
