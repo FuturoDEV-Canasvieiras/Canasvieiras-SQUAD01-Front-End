@@ -1,46 +1,62 @@
 import React from "react";
-import Navbar from "../../Navbar/Navbar";
 
 const Home = () => {
   return (
-    <div className="pagina-principal">
-      <header>
-        <h1>Tudo que sua ONG precisa!</h1>
+    <div>
+      <header className="text-center py-4">
+        <h1 className="display-4">DEV in Adotion</h1>
+        <p className="lead">
+          Contribua para a alimentação de gatos e cachorros abandonados
+        </p>
+        <a className="btn btn-success btn-lg" href="#">
+          Faça sua doação
+        </a>
       </header>
-      <h1 className="mt-5">LAB Cat&amp;Dog</h1>
-      <h2 className="mb-4">Desenvolvimento de Aplicações</h2>
-      <div className="row">
-        <div className="col-md-6">
-          <img src="/" alt="Cachorro" className="img-fluid" />
-        </div>
-        <div className="col-md-6">
-          <img src="/" alt="Gato" className="img-fluid" />
+
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <div className="embed-responsive embed-responsive-16by9">
+              <iframe
+                className="embed-responsive-item"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/Jsj-hDW9bS8"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
         </div>
       </div>
-      <p>
-        A LAB Cat&amp;Dog é uma empresa especializada em desenvolvimento de
-        aplicações que está buscando expandir seus negócios. Atualmente, estamos
-        focados no desenvolvimento de uma aplicação para controle de estoque de
-        materiais para ONGs.
-      </p>
-      <p>
-        Para isso, estamos contratando novos desenvolvedores para o nosso quadro
-        de colaboradores. Antes de finalizar as contratações, queremos avaliar
-        suas habilidades e conhecimentos através de um desafio prático. O
-        objetivo é criar um sistema de controle de estoque chamado
-        DEVin-Adoption.
-      </p>
-      <p>
-        Parabéns! Você foi escolhido para criar o DEVin-Adoption. Utilize a
-        biblioteca React com Vite para desenvolver o sistema. Tenha em mente que
-        a aplicação precisa ser responsiva e ter uma interface intuitiva para
-        facilitar o controle de estoque das ONGs.
-      </p>
-      <p>
-        Aproveite essa oportunidade para demonstrar suas habilidades e destacar
-        seu potencial como desenvolvedor. Estamos ansiosos para ver o seu
-        trabalho!
-      </p>
+
+      <section className="container mt-5">
+        <div className="row">
+          <div className="col-md-6">
+            <h2>Sobre Nós</h2>
+            <p>
+              Somos uma ONG dedicada a ajudar gatos e cachorros em situação de
+              abandono. Nosso objetivo é garantir que esses animais tenham uma
+              alimentação adequada enquanto aguardam por um novo lar.
+              Trabalhamos em parceria com pet shops, clínicas veterinárias e
+              doadores para coletar alimentos e redistribuí-los de forma justa.
+            </p>
+          </div>
+          <div className="col-md-6">
+            <h2>Como Funciona</h2>
+            <p>
+              Recebemos doações de alimentos para gatos e cachorros de
+              diferentes marcas e tipos. Nossa equipe faz a triagem dos
+              alimentos e os redistribui para abrigos, protetores independentes
+              e famílias temporárias que cuidam dos animais em transição. Além
+              disso, também realizamos feiras de adoção e promovemos campanhas
+              de conscientização sobre a posse responsável.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

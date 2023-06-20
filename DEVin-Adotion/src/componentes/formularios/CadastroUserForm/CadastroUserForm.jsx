@@ -17,12 +17,12 @@ export default function CadastroForm() {
   return (
     <>
       <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "100vh" }}
+        className="d-flex justify-content-center align-items-center mb-4"
+        style={{ height: "100%" }}
       >
         <form
           onSubmit={handleSubmit}
-          className="col-4"
+          className="col-4 formulario-borda"
           id="FormularioCadastroUsuario"
         >
           <h1 className="text-center">Cadastro</h1>
