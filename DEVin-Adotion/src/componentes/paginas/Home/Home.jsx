@@ -1,4 +1,6 @@
 import React from "react";
+import Navbar from "../Navbar/Navbar";
+
 import ImagemCachorroAdocao from "../../../imagens/cachorro-adocao.jpg";
 import Filhotes from "../../../imagens/filhotes.jpg";
 import Pessoa from "../../../imagens/pessoa.jpg";
