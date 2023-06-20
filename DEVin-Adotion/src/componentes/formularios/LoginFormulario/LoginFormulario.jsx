@@ -42,7 +42,8 @@ export default function LoginFormulario() {
     <>
       <div
         className="d-flex justify-content-center align-items-center"
-        style={{ height: '100vh' }}
+        style={{ height: "100%" }}
+        main
       >
         <form
           onSubmit={handleSubmit}
