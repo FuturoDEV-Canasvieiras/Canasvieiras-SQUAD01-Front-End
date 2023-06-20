@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export const fetchLoginData = async (data) => {
-  const response = await fetch("https://login-futurodev.free.beeceptor.com/loginpost", {
+  const response = await fetch("/usuarios/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
