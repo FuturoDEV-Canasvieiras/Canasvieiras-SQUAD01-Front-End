@@ -2,7 +2,7 @@ import { useFetch } from '../../../hooks/useFetch'
 import { useForm } from '../../../hooks/useForm'
 
 export default function CadastroProdutoForm() {
-    const { handleChange, form, resetForm } = useForm({ armazenamento: "", produto: "", quantidade: 0, animal: "", categoria: "" })
+    const { handleChange, form, resetForm } = useForm({ armazem: "", produto: "", quantidade: 0, animal: "", categoria: "" })
     const { createData } = useFetch('https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/cadastro_produto')
 
     const handleSubmit = (event) => {
@@ -14,8 +14,8 @@ export default function CadastroProdutoForm() {
         <>
             <h1>Cadastro Estoque</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor='armazenamento'>Armazenamento:</label><br />
-                <select name='armazenamento' value={form.armazenamento} onChange={handleChange}>
+                <label htmlFor='armazem'>Armazenamento:</label><br />
+                <select name='armazem' value={form.armazem} onChange={handleChange}>
                     <option value="" disabled>Selecione o Estoque</option>
                     <option value="Estoque 01">Estoque 01</option>
                     <option value="Estoque 02">Estoque 02</option>
