@@ -5,8 +5,8 @@ export default function CadastroArmazemForm() {
     const { handleChange, form, resetForm } = useForm({ nome: "", animal: "", situacao: true })
     const { createData } = useFetch("http://localhost:8080/armazem")
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = () => {
+        //event.preventDefault();
         createData(form)
         resetForm();
     }
