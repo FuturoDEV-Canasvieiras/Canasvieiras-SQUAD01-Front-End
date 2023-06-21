@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { useFetch } from "../../../hooks/useFetch";
 import { useForm } from "../../../hooks/useForm";
+import { Navigate } from 'react-router-dom';
 
 export default function CadastroForm() {
   const { handleChange, form, resetForm } = useForm({
@@ -7,13 +9,56 @@ export default function CadastroForm() {
     senha: "",
     email: "",
   });
-  const { createData } = useFetch("");
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isEmailRegistered, setIsEmailRegistered] = useState(false);
+  const [status, setStatus] = useState('');
+  const { createData } = useFetch("https://demo5317051.mockable.io/usuarios");
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    if (!form.email) return; 
+
+    const handleEmailRegistration = async () => {
+      try {
+        const response = await createData({ email: form.email });
+        if (response && response.isRegistered !== undefined) {
+          setIsEmailRegistered(response.isRegistered);
+        } else {
+          setIsEmailRegistered(false);
+        }
+      } catch (error) {
+        console.error("Error checking email registration:", error);
+        
+        setIsEmailRegistered(false); 
+      }
+    };
+
+    handleEmailRegistration();
+  }, [form.email, createData]);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    createData(form);
-    resetForm();
+
+    if (!form.email || !form.senha || !form.nome) {
+      setErrorMessage('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    if (isEmailRegistered) {
+      setErrorMessage('O email já está cadastrado.');
+      return;
+    }
+
+    try {
+      await createData(form);
+      setStatus('Cadastro bem sucedido!');
+      resetForm();
+    } catch (error) {
+      console.error("Error creating data:", error);
+      setErrorMessage('Ocorreu um erro ao criar o cadastro.');
+      setStatus('Ocorreu um erro ao processar a solicitação');
+    }
   };
+  
   return (
     <>
       <div
@@ -26,6 +71,7 @@ export default function CadastroForm() {
           id="FormularioCadastroUsuario"
         >
           <h1 className="text-center">Cadastro</h1>
+          {errorMessage && <p>{errorMessage}</p>}
           <label htmlFor="nomeCompleto">Nome completo:</label>
           <input
             className="form-control"
@@ -69,6 +115,8 @@ export default function CadastroForm() {
               }{" "}
               para fazer login
             </span>
+            {status && alert(`${status} Você será redirecionado para a página de login`)}
+            {status === 'Cadastro bem sucedido!' ? <Navigate to="/login" replace={true}/> : null}
           </div>
         </form>
       </div>
