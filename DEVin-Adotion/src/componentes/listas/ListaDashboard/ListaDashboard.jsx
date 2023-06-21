@@ -1,7 +1,7 @@
 import { useFetch } from "../../../hooks/useFetch";
 
 export default function ListaDashboard() {
-  const { itens: itensDash, error } = useFetch("https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/cadastro_produto");
+  const { itens: itensDash, error } = useFetch("http://127.0.0.1:8080/estatisticas/{animal}/{categoria}");
     console.log(itensDash)
   if (error) {
     return <div>Erro ao carregar os dados do dashboard</div>;
@@ -16,7 +16,7 @@ export default function ListaDashboard() {
     }, 0);
   };
 
-  const totalAntiparasitarioGatoAdulto = calcularTotalPorProdutoCategoria('antiparasitario', 'adulto', 'Gato');
+/*   const totalAntiparasitarioGatoAdulto = calcularTotalPorProdutoCategoria('antiparasitario', 'adulto', 'Gato');
   const totalAntiparasitarioGatoFilhote = calcularTotalPorProdutoCategoria('antiparasitario', 'filhote', 'Gato');
   const totalAntiparasitarioCachorroAdulto = calcularTotalPorProdutoCategoria('antiparasitario', 'adulto', 'Cachorro');
   const totalAntiparasitarioCachorroFilhote = calcularTotalPorProdutoCategoria('antiparasitario', 'filhote', 'Cachorro');
@@ -29,7 +29,7 @@ export default function ListaDashboard() {
   const totalRacaoGatoAdulto = calcularTotalPorProdutoCategoria('racao', 'adulto', 'Gato');
   const totalRacaoGatoFilhote = calcularTotalPorProdutoCategoria('racao', 'filhote', 'Gato');
   const totalRacaoCachorroAdulto = calcularTotalPorProdutoCategoria('racao', 'adulto', 'Cachorro');
-  const totalRacaoCachorroFilhote = calcularTotalPorProdutoCategoria('racao', 'filhote', 'Cachorro');
+  const totalRacaoCachorroFilhote = calcularTotalPorProdutoCategoria('racao', 'filhote', 'Cachorro'); */
 
   return (
     <>
