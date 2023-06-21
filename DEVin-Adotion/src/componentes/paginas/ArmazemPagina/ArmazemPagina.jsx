@@ -2,7 +2,7 @@ import { useFetch } from "../../../hooks/useFetch"
 import { CadastroArmazemForm } from "../../formularios";
 
 export default function ArmazemPagina() {
-    const { itens: armazens } = useFetch("https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/armazens")
+    const { itens: armazens } = useFetch("http://localhost:8080/armazem")
     return (
         <>
             <CadastroArmazemForm />
@@ -10,7 +10,7 @@ export default function ArmazemPagina() {
             <table>
                 <thead>
                     <tr>
-                        <th>Armazém</th>
+                        <th>Nome do Armazém</th>
                         <th>Animal</th>
                         <th>Situação</th>
                     </tr>
@@ -20,7 +20,7 @@ export default function ArmazemPagina() {
                         return (
                             <>
                                 <tr key={item.id}>
-                                    <td>{item.armazem}</td>
+                                    <td>{item.nome}</td>
                                     <td>{item.animal}</td>
                                     <td>{item.situacao == true ? 'Disponível' : 'Indisponível'}</td>
                                 </tr>

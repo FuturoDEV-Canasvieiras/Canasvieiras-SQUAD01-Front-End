@@ -4,15 +4,17 @@ import { useForm } from '../../../hooks/useForm';
 
 export default function CadastroProdutoForm() {
   const { handleChange, form, resetForm } = useForm({
-    armazem: "",
     produto: "",
     quantidade: 0,
     animal: "",
-    categoria: ""
+    categoria: "",
+    armazem: {
+      id: ""
+    }
   });
 
-  const { createData } = useFetch('https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/cadastro_produto');
-  const { itens: armazens, error } = useFetch('https://648b306e17f1536d65ea8f26.mockapi.io/testeapi/armazens');
+  const { createData } = useFetch('http://localhost:8080/estoque/cadastro');
+  const { itens: armazens, error } = useFetch('http://localhost:8080/armazem');
   const [selectedArmazem, setSelectedArmazem] = useState(null);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function CadastroProdutoForm() {
   };
 
   const handleArmazemChange = (event) => {
-    const selectedArmazem = armazens.find((item) => item.armazem === event.target.value);
+    const selectedArmazem = armazens.find((item) => item.nome === event.target.value);
     setSelectedArmazem(selectedArmazem);
     handleChange(event);
   };
@@ -52,7 +54,7 @@ export default function CadastroProdutoForm() {
           <option value="" disabled>Selecione o Estoque</option>
           {armazensAbertos().map((item) => {
             return (
-              <option key={item.id} value={item.armazem}>{item.armazem}</option>
+              <option key={item.id} value={item.nome}>{item.nome}</option>
             );
           })}
         </select><br />
