@@ -28,7 +28,7 @@ export default function CadastroProdutoForm() {
   };
 
   const handleArmazemChange = (event) => {
-    const selectedArmazem = armazens.find((item) => item.armazem === event.target.value);
+    const selectedArmazem = armazens.find((item) => item.nome === event.target.value);
     setSelectedArmazem(selectedArmazem);
     handleChange(event);
   };
@@ -52,7 +52,7 @@ export default function CadastroProdutoForm() {
           <option value="" disabled>Selecione o Estoque</option>
           {armazensAbertos().map((item) => {
             return (
-              <option key={item.id} value={item.armazem}>{item.armazem}</option>
+              <option key={item.id} value={item.nome}>{item.nome}</option>
             );
           })}
         </select><br />
