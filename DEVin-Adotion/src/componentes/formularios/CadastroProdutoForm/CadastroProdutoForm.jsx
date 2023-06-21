@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useFetch } from '../../../hooks/useFetch';
 import { useForm } from '../../../hooks/useForm';
-
 export default function CadastroProdutoForm() {
-  const { handleChange, form, resetForm } = useForm({
-    produto: "",
-    quantidade: 0,
-    animal: "",
-    categoria: "",
-    armazem: {
-      id: ""
+  const { handleChange, form, resetForm } = useForm(
+    {
+      produto: "",
+      quantidade: 0,
+      animal: "",
+      categoria: "",
+      armazem:
+      {
+        id: 0
+      }
     }
-  });
-
+  );
   const { createData } = useFetch('http://localhost:8080/estoque/cadastro');
   const { itens: armazens, error } = useFetch('http://localhost:8080/armazem');
   const [selectedArmazem, setSelectedArmazem] = useState(null);
-
   useEffect(() => {
     armazensAbertos();
   }, []);
-
   const armazensAbertos = () => {
     if (!error && armazens) {
       const armazensDisponiveis = armazens.filter((item) => item.situacao === true);
@@ -28,33 +27,41 @@ export default function CadastroProdutoForm() {
     }
     return [];
   };
-
   const handleArmazemChange = (event) => {
-    const selectedArmazem = armazens.find((item) => item.nome === event.target.value);
+    const selectedArmazem = armazens.find((item) => item.id == event.target.value);
     setSelectedArmazem(selectedArmazem);
     handleChange(event);
   };
-
   const handleAnimalChange = (event) => {
     handleChange(event);
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    createData(form);
+    createData(convertToJSON());
     resetForm();
   };
-
+  const convertToJSON = () => {
+    const { produto, quantidade, animal, categoria, armazem } = form;
+    return {
+      produto,
+      quantidade,
+      animal,
+      categoria,
+      armazem: {
+        id: armazem
+      }
+    };
+  };
   return (
     <>
       <h1>Cadastro Estoque</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor='armazem'>Armazenamento:</label><br />
-        <select name='armazem' value={form.armazem} onChange={handleArmazemChange}>
-          <option value="" disabled>Selecione o Estoque</option>
+        <select name='armazem' value={form.armazem.id} onChange={handleArmazemChange}>
+          <option value="" disabled>Selecione o Armazém</option>
           {armazensAbertos().map((item) => {
             return (
-              <option key={item.id} value={item.nome}>{item.nome}</option>
+              <option key={item.id} value={item.id}>{item.nome}</option>
             );
           })}
         </select><br />
