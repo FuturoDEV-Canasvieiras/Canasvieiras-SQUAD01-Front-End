@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from '../../../hooks/useForm';
 import { fetchLoginData } from '../../../hooks/useFetch';
+import { Navigate } from 'react-router-dom';
 
 
 export default function LoginFormulario() {
@@ -11,10 +12,10 @@ export default function LoginFormulario() {
   const [errorMessage, setErrorMessage] = useState('');
   const [status, setStatus] = useState('');
 
+
   const handleLogin = async () => {
     try {
       const response = await fetchLoginData(form);
-      console.log(response)
       if (response && response.success) {
         setStatus('Login bem sucedido!');
       } else {
@@ -23,6 +24,7 @@ export default function LoginFormulario() {
     } catch (error) {
       setStatus('Ocorreu um erro ao processar a solicitação');
     }
+    
   };
 
   const handleSubmit = async (event) => {
@@ -89,6 +91,7 @@ export default function LoginFormulario() {
             </span>
           </div>
           {status && <p>{status}</p>}
+          {status === 'Login bem sucedido!' ? <Navigate to="/dashboard" replace={true}/> : null}
         </form>
       </div>
     </>
