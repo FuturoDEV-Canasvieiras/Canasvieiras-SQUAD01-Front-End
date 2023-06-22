@@ -19,9 +19,13 @@ export default function CadastroForm() {
 
     const handleEmailRegistration = async () => {
       try {
-        const response = await createData({ email: form.email });
-        if (response && response.isRegistered !== undefined) {
-          setIsEmailRegistered(response.isRegistered);
+        const response = await createData({
+          nome: form.email,
+          senha: form.senha, 
+          email: form.email 
+        });
+        if (response && response.success) {
+          setIsEmailRegistered(true);
         } else {
           setIsEmailRegistered(false);
         }
@@ -107,14 +111,12 @@ export default function CadastroForm() {
             Cadastrar
           </button>
           <div className="text-center">
-            <span>
-              Clique{" "}
-              {
-                <a href="/">
-                  <strong>aqui</strong>
-                </a>
-              }{" "}
-              para fazer login
+          <span>
+              Clique 
+                <span onClick={<Navigate to="/login" replace={true}/>}>
+                  aqui
+                </span>
+              para cadastrar
             </span>
             {status &&
               alert(`${status} Você será redirecionado para a página de login`)}
