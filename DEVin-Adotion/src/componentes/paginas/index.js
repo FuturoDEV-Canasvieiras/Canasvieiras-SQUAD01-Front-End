@@ -6,6 +6,7 @@ import LoginPagina from "./LoginPagina/LoginPagina"
 import NavbarUser from "./Navbar/NavbarUser"
 import Error from "../paginas/Error/Error"
 import NavbarSystem from "./Navbar/NavbarInSystem"
+import EstoquePagina from "./EstoquePagina/EstoquePagina"
 
 export {
     CadastroUserPagina,
@@ -14,5 +15,6 @@ export {
     Dashboard,
     LoginPagina,
     NavbarUser, NavbarSystem,
-    Error
+    Error,
+    EstoquePagina
 }

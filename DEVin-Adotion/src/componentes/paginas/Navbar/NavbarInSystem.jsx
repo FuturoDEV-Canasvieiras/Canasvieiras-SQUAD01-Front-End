@@ -6,6 +6,7 @@ import {
   Dashboard,
   Error,
   LoginPagina,
+  EstoquePagina,
 } from "..";
 
 export default function NavbarSystem() {
@@ -43,6 +44,11 @@ export default function NavbarSystem() {
                 Armazém
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/produtos-estoque" className="nav-link">
+                Produtos Estoque
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>
@@ -51,10 +57,12 @@ export default function NavbarSystem() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/produtos-estoque" element={<EstoquePagina />} />
           <Route
             path="/cadastro-produtos"
             element={<CadastroProdutoPagina />}
           />
+          <Route path="/*" element={<Error />} />
           <Route path="/cadastro-armazem" element={<ArmazemPagina />} />
           <Route path="/*" element={<Error />} />
           <Route path="/login" element={<LoginPagina />} />

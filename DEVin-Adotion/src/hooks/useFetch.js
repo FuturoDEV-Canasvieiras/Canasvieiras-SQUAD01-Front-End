@@ -32,7 +32,6 @@ export const useFetch = (url) => {
   };
 
   const deleteData = (id) => {
-    console.log(id)
     fetch(`${url}/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
