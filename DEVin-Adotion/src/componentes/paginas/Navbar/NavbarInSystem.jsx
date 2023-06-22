@@ -1,19 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import {
-  CadastroUserPagina,
   CadastroProdutoPagina,
   ArmazemPagina,
   Dashboard,
-  LoginPagina,
   Error,
+  LoginPagina,
 } from "..";
 
-export default function Navbar() {
+export default function NavbarSystem() {
   return (
     <Router>
       <nav className="navbar navbar-expand-lg navbar-light container-fluid bg-light py-4">
-        <Link to="/" className="navbar-brand">
+        <Link to="/login" className="navbar-brand">
           Dev in Adotion
         </Link>
         <button
@@ -29,16 +28,6 @@ export default function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/cadastro-usuario" className="nav-link">
-                Cadastrar
-              </Link>
-            </li>
             <li className="nav-item">
               <Link to="/dashboard" className="nav-link">
                 Dashboard
@@ -60,16 +49,15 @@ export default function Navbar() {
 
       <div className="container mt-4">
         <Routes>
-          <Route path="/" element={<LoginPagina />} />
-          <Route path="/login" element={<LoginPagina />} />
-          <Route path="/cadastro-usuario" element={<CadastroUserPagina />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route
             path="/cadastro-produtos"
             element={<CadastroProdutoPagina />}
           />
-          <Route path="/*" element={<Error />} />
           <Route path="/cadastro-armazem" element={<ArmazemPagina />} />
+          <Route path="/*" element={<Error />} />
+          <Route path="/login" element={<LoginPagina />} />
         </Routes>
       </div>
     </Router>

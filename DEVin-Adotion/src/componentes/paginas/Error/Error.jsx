@@ -1,16 +1,18 @@
 import React from "react";
+import Rodape from "../../rodape/rodape";
 
 const Error = () => {
   return (
-    <div>
-      <h1 className="mt-5 text-center">Hm...você está tentando</h1>
-      <h2 className="mb-4 text-center">acessar uma página que não existe!</h2>
-      <p className="text-center">
-        Voltar para a{" "}
-        <a href="/">
-          <strong>página inicial</strong>
-        </a>
-      </p>
+    <div className="full-height d-flex flex-column align-items-center justify-content-center">
+      <h1 className="text-white text-shadow p-2">
+        Hmm.. parece que você está perdido!
+      </h1>
+      <a href="/">
+        <h5 className="text-center text-white text-shadow border border-white rounded p-3">
+          Voltar para a página inicial
+        </h5>
+      </a>
+      <Rodape />
     </div>
   );
 };
