@@ -2,7 +2,7 @@ import { useFetch } from "../../../hooks/useFetch"
 import { CadastroArmazemForm } from "../../formularios";
 
 export default function ArmazemPagina() {
-    const { itens: armazens } = useFetch("http://localhost:8080/armazem")
+    const { itens: armazens } = useFetch("http://localhost:3000/armazens")
     return (
         <>
             <CadastroArmazemForm />

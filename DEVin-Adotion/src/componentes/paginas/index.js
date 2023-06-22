@@ -4,6 +4,7 @@ import ArmazemPagina from "./ArmazemPagina/ArmazemPagina"
 import Dashboard from "./Dashboard/Dashboard"
 import LoginPagina from "./LoginPagina/LoginPagina"
 import Navbar from "./Navbar/Navbar"
+import Home from "./Home/Home"
 import Error from "../paginas/Error/Error"
 import EstoquePagina from "./EstoquePagina/EstoquePagina"
 
