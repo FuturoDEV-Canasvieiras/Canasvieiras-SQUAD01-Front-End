@@ -77,12 +77,12 @@ export default function LoginFormulario() {
           </button>
           <div className="text-center">
             <span>
-              Clique{" "}
-              {
-                <a href="/cadastro-usuario">
-                  <strong>aqui</strong>
-                </a>
-              }{" "}
+              Clique
+              <span
+                onClick={<Navigate to="/cadastro-usuario" replace={true} />}
+              >
+                aqui
+              </span>
               para cadastrar
             </span>
           </div>
