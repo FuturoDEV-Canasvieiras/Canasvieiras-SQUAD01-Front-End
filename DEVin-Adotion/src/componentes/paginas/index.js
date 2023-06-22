@@ -6,6 +6,7 @@ import LoginPagina from "./LoginPagina/LoginPagina"
 import Navbar from "./Navbar/Navbar"
 import Home from "../paginas/Home/Home"
 import Error from "../paginas/Error/Error"
+import EstoquePagina from "./EstoquePagina/EstoquePagina"
 
 export {
     CadastroUserPagina,
@@ -15,5 +16,6 @@ export {
     LoginPagina,
     Navbar,
     Home,
-    Error
+    Error,
+    EstoquePagina
 }
