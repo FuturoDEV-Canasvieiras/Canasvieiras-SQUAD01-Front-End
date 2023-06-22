@@ -2,18 +2,19 @@
 #FormularioCadastroUsuario {
   background-color: white;
   padding: 30px;
+  border-radius: 2px;
 }
 
 .bg-success,
 .btn-success {
-  background-color: #198754 !important;
+  background-color: #2499ae !important;
   box-shadow: none !important;
   outline: none !important;
-  border-color: #198754 !important;
+  border-color: #2499ae !important;
 }
 
 .btn-success:hover {
-  background-color: #167a4a !important;
+  background-color: #1c8294 !important;
 }
 
 .formulario-borda {
@@ -24,4 +25,31 @@
 
 .card-img-top {
   height: 370px;
+}
+
+.footer-wrapper {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.fundoUsuario {
+  background-image: url("./imagens/fundo_login.jpg");
+  background-size: cover;
+  background-position: right;
+}
+
+.full-height {
+  min-height: 100vh;
+}
+
+#FormularioLoginUsuario {
+  width: 300px;
+  margin-left: auto;
+}
+
+#FormularioCadastroUsuario {
+  width: 300px;
+  margin-left: auto;
 }

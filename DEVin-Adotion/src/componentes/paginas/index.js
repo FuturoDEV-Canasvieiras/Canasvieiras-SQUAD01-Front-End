@@ -4,7 +4,6 @@ import ArmazemPagina from "./ArmazemPagina/ArmazemPagina"
 import Dashboard from "./Dashboard/Dashboard"
 import LoginPagina from "./LoginPagina/LoginPagina"
 import Navbar from "./Navbar/Navbar"
-import Home from "../paginas/Home/Home"
 import Error from "../paginas/Error/Error"
 
 export {
@@ -14,6 +13,5 @@ export {
     Dashboard,
     LoginPagina,
     Navbar,
-    Home,
     Error
 }
