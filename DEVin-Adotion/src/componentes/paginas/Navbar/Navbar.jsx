@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import { CadastroUserPagina, CadastroProdutoPagina, ArmazemPagina, Dashboard, LoginPagina, Home, Error, EstoquePagina } from "..";
+import { CadastroUserPagina, CadastroProdutoPagina, ArmazemPagina, Dashboard, LoginPagina, Error, EstoquePagina } from "..";
 
 export default function Navbar() {
   return (

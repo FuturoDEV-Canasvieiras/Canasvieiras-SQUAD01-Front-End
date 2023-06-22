@@ -2,7 +2,9 @@
 import { useFetch } from "../../../hooks/useFetch"
 
 export default function ListaEstoque() {
-    const { itens: produtos, deleteData } = useFetch('http://648b306e17f1536d65ea8f26.mockapi.io/testeapi/cadastro_produto')
+    const { itens: produtos, deleteData } = useFetch('http://localhost:8080/estoque')
+
+    console.log(produtos);
 
     function handleDelete(id) {
         deleteData(id);
@@ -18,6 +20,7 @@ export default function ListaEstoque() {
                         <th>Armazém</th>
                         <th>Produto</th>
                         <th>Quantidade</th>
+                        <th>Animal</th>
                         <th>Categoria</th>
                     </tr>
                 </thead>
@@ -27,9 +30,9 @@ export default function ListaEstoque() {
                             <>
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
-                                    <td>{item.armazem}</td>
                                     <td>{item.produto}</td>
                                     <td>{item.quantidade}</td>
+                                    <td>{item.animal}</td>
                                     <td>{item.categoria}</td>
                                     <button type="button">Editar</button>
                                     <button type="button" onClick={() => handleDelete(item.id)}>Remover</button>

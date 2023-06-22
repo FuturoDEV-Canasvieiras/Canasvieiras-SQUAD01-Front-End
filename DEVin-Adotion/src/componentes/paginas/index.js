@@ -14,7 +14,6 @@ export {
     Dashboard,
     LoginPagina,
     Navbar,
-    Home,
     Error,
     EstoquePagina
 }
