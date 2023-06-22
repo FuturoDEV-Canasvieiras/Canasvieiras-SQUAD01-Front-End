@@ -21,8 +21,8 @@ export default function CadastroForm() {
       try {
         const response = await createData({
           nome: form.email,
-          senha: form.senha, 
-          email: form.email 
+          senha: form.senha,
+          email: form.email,
         });
         if (response && response.success) {
           setIsEmailRegistered(true);
@@ -111,12 +111,12 @@ export default function CadastroForm() {
             Cadastrar
           </button>
           <div className="text-center">
-          <span>
-              Clique 
-                <span onClick={<Navigate to="/login" replace={true}/>}>
-                  aqui
-                </span>
-              para cadastrar
+            <span>
+              Clique{" "}
+              <a href="/login">
+                <strong>aqui </strong>
+              </a>
+              para fazer login
             </span>
             {status &&
               alert(`${status} Você será redirecionado para a página de login`)}

@@ -1,13 +1,16 @@
 import "./App.css";
 
-import { LoginPagina, Navbar } from "./componentes/paginas";
+import { LoginPagina, NavbarUser, NavbarSystem } from "./componentes/paginas";
 
 function App() {
   return (
     <>
-      <div className="fundoUsuario">
-        <Navbar />
+      <div>
+        <NavbarSystem />
       </div>
+      {/* <div className="fundoUsuario">
+        <NavbarUser />
+      </div> */}
     </>
   );
 }
