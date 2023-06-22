@@ -11,6 +11,8 @@ export const fetchLoginData = async (data) => {
 
   return {...json, success: response.ok};
 };
+
+
 export const useFetch = (url) => {
   const [itens, setItens] = useState([]);
 
@@ -39,14 +41,17 @@ export const useFetch = (url) => {
     .then(() => getData());
   };
 
-  const updateData = (body) => {
-    fetch(url, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    })
-    .then(() => getData())
-  }
+  const updateData = (id, body) => {
+    return new Promise((resolve, reject) => {
+      fetch(`${url}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      })
+        .then(() => resolve())
+        .catch((error) => reject(error));
+    });
+  };
 
   const loginData = async (body) => {
     try {

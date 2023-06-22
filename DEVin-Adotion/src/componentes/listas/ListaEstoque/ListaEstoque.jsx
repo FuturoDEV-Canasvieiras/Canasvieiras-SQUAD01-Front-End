@@ -1,12 +1,52 @@
-
-import { useFetch } from "../../../hooks/useFetch"
+import { useState, useEffect } from "react";
+import { useFetch } from "../../../hooks/useFetch";
 
 export default function ListaEstoque() {
-    const { itens: produtos, deleteData } = useFetch('http://648b306e17f1536d65ea8f26.mockapi.io/testeapi/cadastro_produto')
+    const { itens: produtos, deleteData, updateData } = useFetch(
+        "http://localhost:3000/produtos"
+    );
+
+    const [editingItemId, setEditingItemId] = useState(null);
+    const [produtosList, setProdutosList] = useState([]);
+
+    useEffect(() => {
+        setProdutosList(produtos);
+    }, [produtos]);
 
     function handleDelete(id) {
+        setProdutosList((prevProdutos) =>
+            prevProdutos.filter((item) => item.id !== id)
+        );
         deleteData(id);
-        window.location.reload()
+    }
+
+    function handleEdit(id) {
+        setEditingItemId(id);
+    }
+
+    function handleSave(id) {
+        const categoriaElement = document.getElementById(`categoria-${id}`);
+        const quantidadeElement = document.getElementById(`quantidade-${id}`);
+        const produto = produtosList.find((item) => item.id === id);
+
+        const updatedProduto = {
+            ...produto,
+            categoria: categoriaElement.value,
+            quantidade: quantidadeElement.value,
+        };
+
+        updateData(id, updatedProduto)
+            .then(() => {
+                setEditingItemId(null);
+                setProdutosList((prevProdutos) =>
+                    prevProdutos.map((item) =>
+                        item.id === id ? { ...item, ...updatedProduto } : item
+                    )
+                );
+            })
+            .catch((error) => {
+                console.error("Erro ao atualizar o item:", error);
+            });
     }
 
     return (
@@ -17,32 +57,81 @@ export default function ListaEstoque() {
                         <th>ID</th>
                         <th>Armazém</th>
                         <th>Produto</th>
-                        <th>Quantidade</th>
                         <th>Categoria</th>
+                        <th>Quantidade</th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {produtos ? (produtos.map((item) => {
-                        return (
-                            <>
+                    {produtosList ? (
+                        produtosList.map((item) => {
+                            const { nome } = item.armazem || {};
+                            const isEditing = item.id === editingItemId;
+
+                            return (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
-                                    <td>{item.armazem}</td>
+                                    <td>{nome}</td>
                                     <td>{item.produto}</td>
-                                    <td>{item.quantidade}</td>
-                                    <td>{item.categoria}</td>
-                                    <button type="button">Editar</button>
-                                    <button type="button" onClick={() => handleDelete(item.id)}>Remover</button>
+                                    <td>
+                                        {isEditing ? (
+                                            <select
+                                                id={`categoria-${item.id}`}
+                                                defaultValue={item.categoria}
+                                            >
+                                                <option value="adulto">Adulto</option>
+                                                <option value="filhote">Filhote</option>
+                                            </select>
+                                        ) : (
+                                            item.categoria
+                                        )}
+                                    </td>
+                                    <td>
+                                        {isEditing ? (
+                                            <input
+                                                type="number"
+                                                id={`quantidade-${item.id}`}
+                                                defaultValue={item.quantidade}
+                                                min={0}
+                                            />
+                                        ) : (
+                                            item.quantidade
+                                        )}
+                                    </td>
+
+                                    <td>
+                                        {isEditing ? (
+                                            <button
+                                                type="button"
+                                                onClick={() => handleSave(item.id)}
+                                            >
+                                                Salvar
+                                            </button>
+                                        ) : (
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleEdit(item.id)}
+                                                >
+                                                    Editar
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleDelete(item.id)}
+                                                >
+                                                    Remover
+                                                </button>
+                                            </>
+                                        )}
+                                    </td>
                                 </tr>
-                            </>
-                        )
-                    })
+                            );
+                        })
                     ) : (
                         <p>nenhum produto cadastrado ainda</p>
-                    )
-                    }
+                    )}
                 </tbody>
             </table>
         </>
-    )
+    );
 }

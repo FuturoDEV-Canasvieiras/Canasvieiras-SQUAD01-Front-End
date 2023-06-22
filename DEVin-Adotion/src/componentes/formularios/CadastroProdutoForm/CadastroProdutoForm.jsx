@@ -8,14 +8,11 @@ export default function CadastroProdutoForm() {
       quantidade: 0,
       animal: "",
       categoria: "",
-      armazem:
-      {
-        id: 0
-      }
+      armazem: ""
     }
   );
-  const { createData } = useFetch('http://localhost:8080/estoque/cadastro');
-  const { itens: armazens, error } = useFetch('http://localhost:8080/armazem');
+  const { createData } = useFetch('http://localhost:3000/produtos');
+  const { itens: armazens, error } = useFetch('http://localhost:3000/armazens');
   const [selectedArmazem, setSelectedArmazem] = useState(null);
 
   useEffect(() => {
@@ -41,23 +38,21 @@ export default function CadastroProdutoForm() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    createData(convertToJSON());
+    createData(convertToJSON(selectedArmazem));
     resetForm();
   };
 
-  const convertToJSON = () => {
-    const { produto, quantidade, animal, categoria, armazem } = form;
+  const convertToJSON = (selectedArmazem) => {
+    const { produto, quantidade, animal, categoria } = form;
     return {
       produto,
       quantidade,
       animal,
       categoria,
-      armazem: {
-        id: armazem
-      }
+      armazem: { ...selectedArmazem }
     };
   };
-  
+
   return (
     <>
       <h1>Cadastro Estoque</h1>
@@ -79,7 +74,7 @@ export default function CadastroProdutoForm() {
           <option value="antipulgas">Antipulgas</option>
         </select><br />
         <label htmlFor='quantidade'>Quantidade:</label><br />
-        <input type="number" name="quantidade" value={form.quantidade} onChange={handleChange} /><br />
+        <input type="number" name="quantidade" min={0} value={form.quantidade} onChange={handleChange} /><br />
         <label htmlFor='animal'>Animal:</label><br />
         <select name='animal' value={form.animal} onChange={handleAnimalChange}>
           <option value="" disabled>Selecione o Animal</option>
