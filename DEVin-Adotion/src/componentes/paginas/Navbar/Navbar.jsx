@@ -1,13 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import {
-  CadastroUserPagina,
-  CadastroProdutoPagina,
-  ArmazemPagina,
-  Dashboard,
-  LoginPagina,
-  Error,
-} from "..";
+import { CadastroUserPagina, CadastroProdutoPagina, ArmazemPagina, Dashboard, LoginPagina, Home, Error, EstoquePagina } from "..";
 
 export default function Navbar() {
   return (
@@ -54,6 +47,12 @@ export default function Navbar() {
                 Armazém
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/produtos-estoque" className="nav-link">
+                Produtos Estoque
+              </Link>
+            </li>
+
           </ul>
         </div>
       </nav>
@@ -64,10 +63,8 @@ export default function Navbar() {
           <Route path="/login" element={<LoginPagina />} />
           <Route path="/cadastro-usuario" element={<CadastroUserPagina />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route
-            path="/cadastro-produtos"
-            element={<CadastroProdutoPagina />}
-          />
+          <Route path="/produtos-estoque" element={<EstoquePagina />} />
+          <Route path="/cadastro-produtos" element={<CadastroProdutoPagina />} />
           <Route path="/*" element={<Error />} />
           <Route path="/cadastro-armazem" element={<ArmazemPagina />} />
         </Routes>
