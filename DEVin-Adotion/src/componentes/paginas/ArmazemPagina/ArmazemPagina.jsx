@@ -46,6 +46,25 @@ export default function ArmazemPagina() {
             });
     }
 
+    function handleToggleStatus(id) {
+        setArmazensList((prevArmazens) =>
+            prevArmazens.map((item) =>
+                item.id === id ? { ...item, situacao: !item.situacao } : item
+            )
+        );
+
+        const armazem = armazensList.find((item) => item.id === id);
+        const updatedArmazem = {
+            ...armazem,
+            situacao: !armazem.situacao,
+        };
+
+        updateData(id, updatedArmazem)
+            .catch((error) => {
+                console.error("Erro ao atualizar o item:", error);
+            });
+    }
+
     return (
         <>
             <CadastroArmazemForm />
@@ -90,7 +109,11 @@ export default function ArmazemPagina() {
                                     ) : (
                                         <td>{item.animal}</td>
                                     )}
-                                    <td>{item.situacao === true ? 'Disponível' : 'Indisponível'}</td>
+                                    <td>
+                                        <button onClick={() => handleToggleStatus(item.id)}>
+                                            {item.situacao ? "Disponivel" : "Indisponivel"}
+                                        </button>
+                                    </td>
                                     <td>
                                         {isEditing ? (
                                             <button
