@@ -12,7 +12,7 @@ export default function CadastroForm() {
   });
   const [errorMessage, setErrorMessage] = useState('');
   const [status, setStatus] = useState('');
-  const { createData } = useFetch("http://localhost:3000/usuarios");
+  const { createData } = useFetch("http://localhost:8080/usuarios/cadastro");
   
   let userEmail = localStorage.getItem('email');
 
