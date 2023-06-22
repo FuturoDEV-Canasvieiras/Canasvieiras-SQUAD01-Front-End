@@ -3,10 +3,9 @@ import { useForm } from '../../../hooks/useForm'
 //url do fetch = mockapi pra testes
 export default function CadastroArmazemForm() {
     const { handleChange, form, resetForm } = useForm({ nome: "", animal: "", situacao: true })
-    const { createData } = useFetch("http://localhost:8080/armazem")
+    const { createData } = useFetch("http://localhost:3000/armazens")
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = () => {
         createData(form)
         resetForm();
     }

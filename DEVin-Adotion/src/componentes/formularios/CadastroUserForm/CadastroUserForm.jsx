@@ -15,14 +15,14 @@ export default function CadastroForm() {
   const { createData } = useFetch("http://localhost:8080/usuarios/cadastro");
   
   let userEmail = localStorage.getItem('email');
-
+  
 
   const handleSubmit = (event) => {
 
     event.preventDefault();
 
     if (!form.email || !form.senha || !form.nome) {
-      setErrorMessage('Por favor, preencha todos os campos.');
+      setErrorMessage("Por favor, preencha todos os campos.");
       return;
     } else if(form.email === userEmail) {
       setErrorMessage('Este e-mail já está cadastrado.');
@@ -44,11 +44,11 @@ export default function CadastroForm() {
       setErrorMessage('Ocorreu um erro ao criar o cadastro.');
     }
   };
-  
+
   return (
     <>
       <div
-        className="d-flex justify-content-center align-items-center"
+        className="d-flex justify-content-center align-items-center full-height"
         style={{ height: "100%" }}
       >
         <form
@@ -57,38 +57,39 @@ export default function CadastroForm() {
           id="FormularioCadastroUsuario"
         >
           <h1 className="text-center">Cadastro</h1>
+          <br />
           {errorMessage && <p>{errorMessage}</p>}
           <label htmlFor="nomeCompleto">Nome completo:</label>
           <input
-            className="form-control"
+            className="form-control my-2"
             type="text"
             name="nome"
             value={form.nome}
             onChange={handleChange}
             placeholder="Exemplo: João da Silva Pereira"
           />
-          <br />
           <label htmlFor="email">Endereço de E-mail:</label>
           <input
-            className="form-control"
+            className="form-control my-2"
             type="email"
             name="email"
             value={form.email}
             onChange={handleChange}
             placeholder="E-mail"
           />
-          <br />
           <label htmlFor="senha">Senha:</label>
           <input
-            className="form-control"
+            className="form-control my-2"
             type="password"
             name="senha"
             value={form.senha}
             onChange={handleChange}
             placeholder="Digite uma senha"
           />
-          <br />
-          <button type="submit" className="button-form btn btn-success w-100">
+          <button
+            type="submit"
+            className="button-form btn btn-success w-100 my-2"
+          >
             Cadastrar
           </button>
           <div className="text-center">

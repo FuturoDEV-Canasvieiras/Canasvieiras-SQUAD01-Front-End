@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import { CadastroUserPagina, CadastroProdutoPagina, ArmazemPagina, Dashboard, LoginPagina, Home, Error } from "..";
+import { CadastroUserPagina, LoginPagina, Error } from "..";
 
-export default function Navbar() {
+export default function NavbarUser() {
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-success container-fluid">
+      <nav className="navbar navbar-expand-lg navbar-light container-fluid bg-light py-4">
         <Link to="/" className="navbar-brand">
           Dev in Adotion
         </Link>
@@ -32,37 +32,18 @@ export default function Navbar() {
                 Cadastrar
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/dashboard" className="nav-link">
-                Dashboard
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/cadastro-produtos" className="nav-link">
-                Cadastro Produtos
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/cadastro-armazem" className="nav-link">
-                Armazém
-              </Link>
-            </li>
-
           </ul>
         </div>
       </nav>
 
       <div className="container mt-4">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LoginPagina />} />
           <Route path="/login" element={<LoginPagina />} />
           <Route path="/cadastro-usuario" element={<CadastroUserPagina />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/cadastro-produtos" element={<CadastroProdutoPagina />} />
           <Route path="/*" element={<Error />} />
-          <Route path="/cadastro-armazem" element={<ArmazemPagina />} />
         </Routes>
       </div>
     </Router>
   );
-};
+}

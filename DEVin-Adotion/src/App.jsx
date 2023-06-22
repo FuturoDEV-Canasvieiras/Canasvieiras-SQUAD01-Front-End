@@ -1,11 +1,16 @@
 import "./App.css";
 
-import { Navbar } from "./componentes/paginas";
+import { LoginPagina, NavbarUser, NavbarSystem } from "./componentes/paginas";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <div>
+        <NavbarSystem />
+      </div>
+      {/* <div className="fundoUsuario">
+        <NavbarUser />
+      </div> */}
     </>
   );
 }

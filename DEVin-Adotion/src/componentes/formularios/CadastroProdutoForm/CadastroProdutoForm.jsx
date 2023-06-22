@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useFetch } from '../../../hooks/useFetch';
 import { useForm } from '../../../hooks/useForm';
-
 export default function CadastroProdutoForm() {
-  const { handleChange, form, resetForm } = useForm({
-    produto: "",
-    quantidade: 0,
-    animal: "",
-    categoria: "",
-    armazem: {
-      id: ""
+  const { handleChange, form, resetForm } = useForm(
+    {
+      produto: "",
+      quantidade: 0,
+      animal: "",
+      categoria: "",
+      armazem: ""
     }
-  });
-
-  const { createData } = useFetch('http://localhost:8080/estoque/cadastro');
-  const { itens: armazens, error } = useFetch('http://localhost:8080/armazem');
+  );
+  const { createData } = useFetch('http://localhost:3000/produtos');
+  const { itens: armazens, error } = useFetch('http://localhost:3000/armazens');
   const [selectedArmazem, setSelectedArmazem] = useState(null);
 
   useEffect(() => {
@@ -30,7 +28,7 @@ export default function CadastroProdutoForm() {
   };
 
   const handleArmazemChange = (event) => {
-    const selectedArmazem = armazens.find((item) => item.nome === event.target.value);
+    const selectedArmazem = armazens.find((item) => item.id == event.target.value);
     setSelectedArmazem(selectedArmazem);
     handleChange(event);
   };
@@ -38,11 +36,21 @@ export default function CadastroProdutoForm() {
   const handleAnimalChange = (event) => {
     handleChange(event);
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    createData(form);
+    createData(convertToJSON(selectedArmazem));
     resetForm();
+  };
+
+  const convertToJSON = (selectedArmazem) => {
+    const { produto, quantidade, animal, categoria } = form;
+    return {
+      produto,
+      quantidade,
+      animal,
+      categoria,
+      armazem: { ...selectedArmazem }
+    };
   };
 
   return (
@@ -51,10 +59,10 @@ export default function CadastroProdutoForm() {
       <form onSubmit={handleSubmit}>
         <label htmlFor='armazem'>Armazenamento:</label><br />
         <select name='armazem' value={form.armazem} onChange={handleArmazemChange}>
-          <option value="" disabled>Selecione o Estoque</option>
+          <option value="" disabled>Selecione o Armazém</option>
           {armazensAbertos().map((item) => {
             return (
-              <option key={item.id} value={item.nome}>{item.nome}</option>
+              <option key={item.id} value={item.id}>{item.nome}</option>
             );
           })}
         </select><br />
@@ -66,7 +74,7 @@ export default function CadastroProdutoForm() {
           <option value="antipulgas">Antipulgas</option>
         </select><br />
         <label htmlFor='quantidade'>Quantidade:</label><br />
-        <input type="number" name="quantidade" value={form.quantidade} onChange={handleChange} /><br />
+        <input type="number" name="quantidade" min={0} value={form.quantidade} onChange={handleChange} /><br />
         <label htmlFor='animal'>Animal:</label><br />
         <select name='animal' value={form.animal} onChange={handleAnimalChange}>
           <option value="" disabled>Selecione o Animal</option>
