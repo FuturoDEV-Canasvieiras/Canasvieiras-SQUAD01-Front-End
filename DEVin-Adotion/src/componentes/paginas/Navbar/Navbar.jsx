@@ -5,7 +5,7 @@ import { CadastroUserPagina, CadastroProdutoPagina, ArmazemPagina, Dashboard, Lo
 export default function Navbar() {
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-success container-fluid">
+      <nav className="navbar navbar-expand-lg navbar-light container-fluid bg-light py-4">
         <Link to="/" className="navbar-brand">
           Dev in Adotion
         </Link>
@@ -59,7 +59,7 @@ export default function Navbar() {
 
       <div className="container mt-4">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LoginPagina />} />
           <Route path="/login" element={<LoginPagina />} />
           <Route path="/cadastro-usuario" element={<CadastroUserPagina />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -71,4 +71,4 @@ export default function Navbar() {
       </div>
     </Router>
   );
-};
+}

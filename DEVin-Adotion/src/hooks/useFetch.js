@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+
 export const fetchLoginData = async (data) => {
   const response = await fetch("http://localhost:8080/usuarios/login", {
     method: "POST",
@@ -47,7 +48,20 @@ export const useFetch = (url) => {
     .then(() => getData())
   }
 
+  const loginData = async (body) => {
+    try {
+      const response = await fetchLoginData(body);
+      if (response.success) {
+        console.log('Login bem sucedido!')
+      } else {
+        console.log('Credenciais inválidas.')
+      }
+    } catch (error) {
+      console.error("Ocorreu um erro ao processar a solicitação. Error logging in:", error);
+    }
+  };
+
   useEffect(() => getData(), []);
   
-  return { itens, createData, deleteData, updateData, getData };
+  return { itens, createData, deleteData, updateData, getData, loginData };
 }
