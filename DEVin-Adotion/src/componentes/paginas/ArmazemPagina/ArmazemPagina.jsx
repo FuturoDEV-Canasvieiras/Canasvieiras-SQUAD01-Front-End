@@ -31,7 +31,6 @@ export default function ArmazemPagina() {
             nome: nomeElement.value,
             animal: animalElement.value,
         };
-
         updateData(id, updatedArmazem)
             .then(() => {
                 setEditingItemId(null);
@@ -52,13 +51,11 @@ export default function ArmazemPagina() {
                 item.id === id ? { ...item, situacao: !item.situacao } : item
             )
         );
-
         const armazem = armazensList.find((item) => item.id === id);
         const updatedArmazem = {
             ...armazem,
             situacao: !armazem.situacao,
         };
-
         updateData(id, updatedArmazem)
             .catch((error) => {
                 console.error("Erro ao atualizar o item:", error);
