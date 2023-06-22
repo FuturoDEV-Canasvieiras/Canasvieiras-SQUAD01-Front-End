@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "../../../hooks/useForm";
 import { fetchLoginData } from "../../../hooks/useFetch";
 import { Navigate } from "react-router-dom";
+import Rodape from "../../rodape/rodape";
 
 export default function LoginFormulario() {
   const { handleChange, form, resetForm } = useForm({
@@ -28,7 +29,7 @@ export default function LoginFormulario() {
     event.preventDefault();
 
     if (!form.email || !form.senha) {
-      setErrorMessage("Por favor, preencha todos os campos.");
+      setErrorMessage("Por favor, preencha todos os campos!");
       return;
     }
 
@@ -49,7 +50,9 @@ export default function LoginFormulario() {
           id="FormularioLoginUsuario"
         >
           <h1 className="text-center">Login</h1>
-          {errorMessage && <p>{errorMessage}</p>}
+          {errorMessage && (
+            <p className="text-center text-erro">{errorMessage}</p>
+          )}
           <label htmlFor="email">E-mail:</label>
           <br />
           <input
@@ -77,13 +80,11 @@ export default function LoginFormulario() {
           </button>
           <div className="text-center">
             <span>
-              Clique
-              <span
-                onClick={<Navigate to="/cadastro-usuario" replace={true} />}
-              >
-                aqui
-              </span>
-              para cadastrar
+              Clique{" "}
+              <a href="/cadastro-usuario">
+                <strong>aqui </strong>
+              </a>
+              para se cadastrar
             </span>
           </div>
           {status && <p>{status}</p>}

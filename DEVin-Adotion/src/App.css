@@ -1,8 +1,12 @@
 #FormularioLoginUsuario,
 #FormularioCadastroUsuario {
-  background-color: white;
+  background-color: ghostwhite;
   padding: 30px;
   border-radius: 2px;
+}
+
+.form-control {
+  background-color: ghostwhite;
 }
 
 .bg-success,
@@ -15,6 +19,7 @@
 
 .btn-success:hover {
   background-color: #1c8294 !important;
+  border-color: #1c8294;
 }
 
 .formulario-borda {
@@ -52,4 +57,18 @@
 #FormularioCadastroUsuario {
   width: 300px;
   margin-left: auto;
+}
+
+.navbar-light {
+  background-color: ghostwhite;
+}
+
+.text-shadow {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.text-erro {
+  color: #941c1c;
+  font-weight: bold;
 }
