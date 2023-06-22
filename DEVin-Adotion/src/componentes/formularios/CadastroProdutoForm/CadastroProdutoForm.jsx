@@ -8,10 +8,7 @@ export default function CadastroProdutoForm() {
       quantidade: 0,
       animal: "",
       categoria: "",
-      armazem:
-      {
-        id: 0
-      }
+      armazem: ""
     }
   );
   const { createData } = useFetch('http://localhost:3000/produtos');
@@ -52,10 +49,10 @@ export default function CadastroProdutoForm() {
       quantidade,
       animal,
       categoria,
-      armazem: {...selectedArmazem}
+      armazem: { ...selectedArmazem }
     };
   };
-  
+
   return (
     <>
       <h1>Cadastro Estoque</h1>
