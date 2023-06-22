@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 import { useForm } from '../../../hooks/useForm';
 import { fetchLoginData } from '../../../hooks/useFetch';
-import { Navigate } from 'react-router-dom';
+
 
 
 export default function LoginFormulario() {
@@ -81,11 +83,7 @@ export default function LoginFormulario() {
           </button>
           <div className="text-center">
             <span>
-              Clique 
-                <span onClick={<Navigate to="/cadastro-usuario" replace={true}/>}>
-                  aqui
-                </span>
-              para cadastrar
+            Se não tiver uma conta, <br/> clique <Link to="/cadastro-usuario">aqui</Link> para fazer o cadastro
             </span>
           </div>
           {status && <p>{status}</p>}
