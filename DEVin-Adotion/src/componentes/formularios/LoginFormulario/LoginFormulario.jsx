@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { useForm } from "../../../hooks/useForm";
-import { fetchLoginData } from "../../../hooks/useFetch";
-import { Navigate } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
+import { useForm } from '../../../hooks/useForm';
+import { fetchLoginData } from '../../../hooks/useFetch';
 import Rodape from "../../rodape/rodape";
 
 export default function LoginFormulario() {
@@ -80,11 +81,7 @@ export default function LoginFormulario() {
           </button>
           <div className="text-center">
             <span>
-              Clique{" "}
-              <a href="/cadastro-usuario">
-                <strong>aqui </strong>
-              </a>
-              para se cadastrar
+            Se não tiver uma conta, <br/> clique <Link to="/cadastro-usuario">aqui</Link> para fazer o cadastro
             </span>
           </div>
           {status && <p>{status}</p>}

@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
+import { Link } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 import { useFetch } from "../../../hooks/useFetch";
 import { useForm } from "../../../hooks/useForm";
-import { Navigate } from "react-router-dom";
 
 export default function CadastroForm() {
   const { handleChange, form, resetForm } = useForm({
@@ -9,57 +10,38 @@ export default function CadastroForm() {
     senha: "",
     email: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isEmailRegistered, setIsEmailRegistered] = useState(false);
-  const [status, setStatus] = useState("");
-  const { createData } = useFetch("https://demo5317051.mockable.io/usuarios");
+  const [errorMessage, setErrorMessage] = useState('');
+  const [status, setStatus] = useState('');
+  const { createData } = useFetch("http://localhost:8080/usuarios/cadastro");
+  
+  let userEmail = localStorage.getItem('email');
+  
 
-  useEffect(() => {
-    if (!form.email) return;
+  const handleSubmit = (event) => {
 
-    const handleEmailRegistration = async () => {
-      try {
-        const response = await createData({
-          nome: form.email,
-          senha: form.senha,
-          email: form.email,
-        });
-        if (response && response.success) {
-          setIsEmailRegistered(true);
-        } else {
-          setIsEmailRegistered(false);
-        }
-      } catch (error) {
-        console.error("Error checking email registration:", error);
-
-        setIsEmailRegistered(false);
-      }
-    };
-
-    handleEmailRegistration();
-  }, [form.email, createData]);
-
-  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!form.email || !form.senha || !form.nome) {
       setErrorMessage("Por favor, preencha todos os campos.");
       return;
-    }
-
-    if (isEmailRegistered) {
-      setErrorMessage("O email já está cadastrado.");
+    } else if(form.email === userEmail) {
+      setErrorMessage('Este e-mail já está cadastrado.');
       return;
+    } else {
+      setErrorMessage('');
     }
 
-    try {
-      await createData(form);
-      setStatus("Cadastro bem sucedido!");
+    try{
+      const response = createData(form);
+        if (response) {
+         localStorage.setItem(response.email, JSON.stringify);
+        }
+
+      setStatus('Cadastro bem sucedido!');
       resetForm();
     } catch (error) {
       console.error("Error creating data:", error);
-      setErrorMessage("Ocorreu um erro ao criar o cadastro.");
-      setStatus("Ocorreu um erro ao processar a solicitação");
+      setErrorMessage('Ocorreu um erro ao criar o cadastro.');
     }
   };
 
@@ -111,18 +93,7 @@ export default function CadastroForm() {
             Cadastrar
           </button>
           <div className="text-center">
-            <span>
-              Clique{" "}
-              <a href="/login">
-                <strong>aqui </strong>
-              </a>
-              para fazer login
-            </span>
-            {status &&
-              alert(`${status} Você será redirecionado para a página de login`)}
-            {status === "Cadastro bem sucedido!" ? (
-              <Navigate to="/login" replace={true} />
-            ) : null}
+            {status ? <p> {status} <br/>Faça o login clicando <Link to="/login">aqui</Link>!</p> : <span>Se já tiver uma conta, <br/> clique <Link to="/login">aqui</Link> para fazer login</span>}
           </div>
         </form>
       </div>
