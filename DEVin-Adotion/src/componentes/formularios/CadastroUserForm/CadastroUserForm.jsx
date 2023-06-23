@@ -12,7 +12,7 @@ export default function CadastroForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isEmailRegistered, setIsEmailRegistered] = useState(false);
   const [status, setStatus] = useState("");
-  const { createData } = useFetch("https://demo5317051.mockable.io/usuarios");
+  const { createData } = useFetch("https://localhost:8080/usuarios");
 
   useEffect(() => {
     if (!form.email) return;
