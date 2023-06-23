@@ -11,8 +11,8 @@ export default function CadastroProdutoForm() {
       armazem: ""
     }
   );
-  const { createData } = useFetch('http://localhost:3000/produtos');
-  const { itens: armazens, error } = useFetch('http://localhost:3000/armazens');
+  const { createData } = useFetch('http://localhost:8080/estoque');
+  const { itens: armazens, error } = useFetch('http://localhost:8080/armazem');
   const [selectedArmazem, setSelectedArmazem] = useState(null);
 
   useEffect(() => {
