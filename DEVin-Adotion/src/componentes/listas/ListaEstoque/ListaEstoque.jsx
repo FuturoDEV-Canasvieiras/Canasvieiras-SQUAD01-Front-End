@@ -3,7 +3,7 @@ import { useFetch } from "../../../hooks/useFetch";
 
 export default function ListaEstoque() {
     const { itens: produtos, deleteData, updateData } = useFetch(
-        "http://localhost:3000/produtos"
+        "http://localhost:8080/estoque"
     );
 
     const [editingItemId, setEditingItemId] = useState(null);

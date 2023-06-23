@@ -7,6 +7,7 @@ import {
   Error,
   LoginPagina,
   EstoquePagina,
+  CadastroUserPagina,
 } from "..";
 
 export default function NavbarSystem() {
@@ -66,6 +67,7 @@ export default function NavbarSystem() {
           <Route path="/cadastro-armazem" element={<ArmazemPagina />} />
           <Route path="/*" element={<Error />} />
           <Route path="/login" element={<LoginPagina />} />
+          <Route path="/cadastro-usuario" element={<CadastroUserPagina />} />
         </Routes>
       </div>
     </Router>

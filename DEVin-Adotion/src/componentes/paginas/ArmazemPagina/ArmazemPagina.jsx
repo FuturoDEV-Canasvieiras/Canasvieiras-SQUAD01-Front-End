@@ -3,7 +3,7 @@ import { useFetch } from "../../../hooks/useFetch";
 import { CadastroArmazemForm } from "../../formularios";
 
 export default function ArmazemPagina() {
-    const { itens: armazens, deleteData, updateData } = useFetch("http://localhost:3000/armazens");
+    const { itens: armazens, deleteData, updateData } = useFetch("http://localhost:8080/armazem");
     const [editingItemId, setEditingItemId] = useState(null);
     const [armazensList, setArmazensList] = useState([]);
 
