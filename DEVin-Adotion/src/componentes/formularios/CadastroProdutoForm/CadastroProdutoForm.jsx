@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useFetch } from '../../../hooks/useFetch';
 import { useForm } from '../../../hooks/useForm';
+
 export default function CadastroProdutoForm() {
-  const { handleChange, form, resetForm } = useForm(
-    {
-      produto: "",
-      quantidade: 0,
-      animal: "",
-      categoria: "",
-      armazem: ""
-    }
-  );
+  const { handleChange, form, resetForm } = useForm({
+    produto: "",
+    quantidade: 0,
+    animal: "",
+    categoria: "",
+    armazem: ""
+  });
+
   const { createData } = useFetch('http://localhost:8080/estoque');
   const { itens: armazens, error } = useFetch('http://localhost:8080/armazem');
   const [selectedArmazem, setSelectedArmazem] = useState(null);
@@ -36,14 +36,23 @@ export default function CadastroProdutoForm() {
   const handleAnimalChange = (event) => {
     handleChange(event);
   };
+
   const handleSubmit = (event) => {
-    const confirmSubmit = () => window.alert("Item cadastrado com sucesso!")
-    if (event) {
-      event.preventDefault();
-      createData(convertToJSON(selectedArmazem));
-      resetForm();
-      confirmSubmit();
-    }
+    event.preventDefault();
+    createData(convertToJSON(selectedArmazem))
+    .then((response) => {
+      if (response.status === 200 || 201) {
+        alert("Item cadastrado com sucesso!");
+      } else {
+        alert("Erro ao cadastrar o item. Por favor, verifique os dados e tente novamente.");
+      }
+    })
+    .catch((error) => {
+      console.error("Erro ao cadastrar o item:", error);
+      alert("Erro ao cadastrar o item. Por favor, verifique os dados e tente novamente.");
+    });
+
+  resetForm();
   };
 
   const convertToJSON = (selectedArmazem) => {

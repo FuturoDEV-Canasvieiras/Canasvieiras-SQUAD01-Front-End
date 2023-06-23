@@ -25,12 +25,18 @@ export const useFetch = (url) => {
   };
   
   const createData = (body) => {
-    fetch(url, {
+    return fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)
     })
-    .then(() => getData())
+    .then(response => {
+      return response.json(); // Retornar a resposta como JSON
+    })
+    .catch(error => {
+      console.error("Erro ao cadastrar o item:", error);
+      throw error; // Lançar o erro novamente para ser tratado no handleSubmit
+    });
   };
 
   const deleteData = (id) => {
