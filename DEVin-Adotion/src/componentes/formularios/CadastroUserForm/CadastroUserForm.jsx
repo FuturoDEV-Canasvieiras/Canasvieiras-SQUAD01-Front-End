@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch";
 import { useForm } from "../../../hooks/useForm";
+import CachorroLogin from "../../../imagens/cachorro-login.png";
+import Rodape from "../../rodape/rodape";
 
 export default function CadastroForm() {
   const { handleChange, form, resetForm } = useForm({
@@ -49,9 +51,14 @@ export default function CadastroForm() {
         className="d-flex justify-content-center align-items-center full-height"
         style={{ height: "100%" }}
       >
+        <img
+          src={CachorroLogin}
+          alt="cachorros e gatos"
+          style={{ height: "500px" }}
+        />
         <form
           onSubmit={handleSubmit}
-          className="col-4"
+          className="col-4 border"
           id="FormularioCadastroUsuario"
         >
           <h1 className="text-center">Cadastro</h1>

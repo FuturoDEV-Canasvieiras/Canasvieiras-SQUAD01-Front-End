@@ -4,6 +4,8 @@ import { Navigate } from "react-router-dom";
 import { useForm } from "../../../hooks/useForm";
 import { fetchLoginData } from "../../../hooks/useFetch";
 import NavbarInSystem from "../../paginas/Navbar/NavbarInSystem";
+import CachorroLogin from "../../../imagens/cachorro-login.png";
+import Rodape from "../../rodape/rodape";
 
 export default function LoginFormulario() {
   const { handleChange, form, resetForm } = useForm({
@@ -45,9 +47,14 @@ export default function LoginFormulario() {
         style={{ height: "100%" }}
         main
       >
+        <img
+          src={CachorroLogin}
+          alt="cachorros e gatos"
+          style={{ height: "500px" }}
+        />
         <form
           onSubmit={handleSubmit}
-          className="col-4"
+          className="col-4 border"
           id="FormularioLoginUsuario"
         >
           <h1 className="text-center">Login</h1>

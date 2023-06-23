@@ -16,7 +16,7 @@ export default function App() {
   return (
     <Router>
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light container-fluid bg-light py-4">
+        <nav className="navbar navbar-expand-lg navbar-light container-fluid py-4">
           <Link to="/" className="navbar-brand">
             Dev in Adotion
           </Link>
