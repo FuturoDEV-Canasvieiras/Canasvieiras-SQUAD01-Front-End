@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useForm } from "../../../hooks/useForm";
 import { fetchLoginData } from "../../../hooks/useFetch";
-import { Navigate } from "react-router-dom";
+import NavbarInSystem from "../../paginas/Navbar/NavbarInSystem";
+import CachorroLogin from "../../../imagens/cachorro-login.png";
 import Rodape from "../../rodape/rodape";
 
 export default function LoginFormulario() {
@@ -44,9 +47,14 @@ export default function LoginFormulario() {
         style={{ height: "100%" }}
         main
       >
+        <img
+          src={CachorroLogin}
+          alt="cachorros e gatos"
+          style={{ height: "500px" }}
+        />
         <form
           onSubmit={handleSubmit}
-          className="col-4"
+          className="col-4 border"
           id="FormularioLoginUsuario"
         >
           <h1 className="text-center">Login</h1>
@@ -80,17 +88,12 @@ export default function LoginFormulario() {
           </button>
           <div className="text-center">
             <span>
-              Clique{" "}
-              <a href="/cadastro-usuario">
-                <strong>aqui </strong>
-              </a>
-              para se cadastrar
+              Se não tiver uma conta, <br /> clique{" "}
+              <Link to="/cadastro-usuario">aqui</Link> para fazer o cadastro
             </span>
           </div>
           {status && <p>{status}</p>}
-          {status === "Login bem sucedido!" ? (
-            <Navigate to="/dashboard" replace={true} />
-          ) : null}
+          {status === "Login bem sucedido!" && <NavbarInSystem />}
         </form>
       </div>
     </>

@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch";
 import { useForm } from "../../../hooks/useForm";
-import { Navigate } from "react-router-dom";
+import CachorroLogin from "../../../imagens/cachorro-login.png";
+import Rodape from "../../rodape/rodape";
 
 export default function CadastroForm() {
   const { handleChange, form, resetForm } = useForm({
@@ -10,56 +13,36 @@ export default function CadastroForm() {
     email: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
-  const [isEmailRegistered, setIsEmailRegistered] = useState(false);
   const [status, setStatus] = useState("");
   const { createData } = useFetch("https://localhost:8080/usuarios");
+  const { createData } = useFetch("http://localhost:8080/usuarios");
 
-  useEffect(() => {
-    if (!form.email) return;
+  let userEmail = localStorage.getItem("email");
 
-    const handleEmailRegistration = async () => {
-      try {
-        const response = await createData({
-          nome: form.email,
-          senha: form.senha,
-          email: form.email,
-        });
-        if (response && response.success) {
-          setIsEmailRegistered(true);
-        } else {
-          setIsEmailRegistered(false);
-        }
-      } catch (error) {
-        console.error("Error checking email registration:", error);
-
-        setIsEmailRegistered(false);
-      }
-    };
-
-    handleEmailRegistration();
-  }, [form.email, createData]);
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     if (!form.email || !form.senha || !form.nome) {
       setErrorMessage("Por favor, preencha todos os campos.");
       return;
-    }
-
-    if (isEmailRegistered) {
-      setErrorMessage("O email já está cadastrado.");
+    } else if (form.email === userEmail) {
+      setErrorMessage("Este e-mail já está cadastrado.");
       return;
+    } else {
+      setErrorMessage("");
     }
 
     try {
-      await createData(form);
+      const response = createData(form);
+      if (response) {
+        localStorage.setItem(response.email, JSON.stringify);
+      }
+
       setStatus("Cadastro bem sucedido!");
       resetForm();
     } catch (error) {
       console.error("Error creating data:", error);
       setErrorMessage("Ocorreu um erro ao criar o cadastro.");
-      setStatus("Ocorreu um erro ao processar a solicitação");
     }
   };
 
@@ -69,9 +52,14 @@ export default function CadastroForm() {
         className="d-flex justify-content-center align-items-center full-height"
         style={{ height: "100%" }}
       >
+        <img
+          src={CachorroLogin}
+          alt="cachorros e gatos"
+          style={{ height: "500px" }}
+        />
         <form
           onSubmit={handleSubmit}
-          className="col-4"
+          className="col-4 border"
           id="FormularioCadastroUsuario"
         >
           <h1 className="text-center">Cadastro</h1>
@@ -111,18 +99,18 @@ export default function CadastroForm() {
             Cadastrar
           </button>
           <div className="text-center">
-            <span>
-              Clique{" "}
-              <a href="/login">
-                <strong>aqui </strong>
-              </a>
-              para fazer login
-            </span>
-            {status &&
-              alert(`${status} Você será redirecionado para a página de login`)}
-            {status === "Cadastro bem sucedido!" ? (
-              <Navigate to="/login" replace={true} />
-            ) : null}
+            {status ? (
+              <p>
+                {" "}
+                {status} <br />
+                Faça o login clicando <Link to="/login">aqui</Link>!
+              </p>
+            ) : (
+              <span>
+                Se já tiver uma conta, <br /> clique{" "}
+                <Link to="/login">aqui</Link> para fazer login
+              </span>
+            )}
           </div>
         </form>
       </div>

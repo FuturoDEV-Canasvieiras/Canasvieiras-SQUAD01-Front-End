@@ -1,3 +1,7 @@
+* {
+  background-color: ghostwhite;
+}
+
 #FormularioLoginUsuario,
 #FormularioCadastroUsuario {
   background-color: ghostwhite;
@@ -44,7 +48,9 @@
   background-size: cover;
   background-position: right;
 }
-
+.fundo-color {
+  background-color: #ccc;
+}
 .full-height {
   min-height: 100vh;
 }
