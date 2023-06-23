@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Navigate } from 'react-router-dom';
-import { useForm } from '../../../hooks/useForm';
-import { fetchLoginData } from '../../../hooks/useFetch';
-import Rodape from "../../rodape/rodape";
+import { Navigate } from "react-router-dom";
+import { useForm } from "../../../hooks/useForm";
+import { fetchLoginData } from "../../../hooks/useFetch";
+import NavbarInSystem from "../../paginas/Navbar/NavbarInSystem";
 
 export default function LoginFormulario() {
   const { handleChange, form, resetForm } = useForm({
@@ -81,13 +81,12 @@ export default function LoginFormulario() {
           </button>
           <div className="text-center">
             <span>
-            Se não tiver uma conta, <br/> clique <Link to="/cadastro-usuario">aqui</Link> para fazer o cadastro
+              Se não tiver uma conta, <br /> clique{" "}
+              <Link to="/cadastro-usuario">aqui</Link> para fazer o cadastro
             </span>
           </div>
           {status && <p>{status}</p>}
-          {status === "Login bem sucedido!" ? (
-            <Navigate to="/dashboard" replace={true} />
-          ) : null}
+          {status === "Login bem sucedido!" && <NavbarInSystem />}
         </form>
       </div>
     </>

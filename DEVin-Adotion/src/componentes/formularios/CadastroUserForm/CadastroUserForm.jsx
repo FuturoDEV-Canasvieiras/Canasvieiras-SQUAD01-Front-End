@@ -1,6 +1,6 @@
-import { useState} from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch";
 import { useForm } from "../../../hooks/useForm";
 
@@ -10,38 +10,36 @@ export default function CadastroForm() {
     senha: "",
     email: "",
   });
-  const [errorMessage, setErrorMessage] = useState('');
-  const [status, setStatus] = useState('');
-  const { createData } = useFetch("http://localhost:8080/usuarios/cadastro");
-  
-  let userEmail = localStorage.getItem('email');
-  
+  const [errorMessage, setErrorMessage] = useState("");
+  const [status, setStatus] = useState("");
+  const { createData } = useFetch("http://localhost:8080/usuarios");
+
+  let userEmail = localStorage.getItem("email");
 
   const handleSubmit = (event) => {
-
     event.preventDefault();
 
     if (!form.email || !form.senha || !form.nome) {
       setErrorMessage("Por favor, preencha todos os campos.");
       return;
-    } else if(form.email === userEmail) {
-      setErrorMessage('Este e-mail já está cadastrado.');
+    } else if (form.email === userEmail) {
+      setErrorMessage("Este e-mail já está cadastrado.");
       return;
     } else {
-      setErrorMessage('');
+      setErrorMessage("");
     }
 
-    try{
+    try {
       const response = createData(form);
-        if (response) {
-         localStorage.setItem(response.email, JSON.stringify);
-        }
+      if (response) {
+        localStorage.setItem(response.email, JSON.stringify);
+      }
 
-      setStatus('Cadastro bem sucedido!');
+      setStatus("Cadastro bem sucedido!");
       resetForm();
     } catch (error) {
       console.error("Error creating data:", error);
-      setErrorMessage('Ocorreu um erro ao criar o cadastro.');
+      setErrorMessage("Ocorreu um erro ao criar o cadastro.");
     }
   };
 
@@ -93,7 +91,18 @@ export default function CadastroForm() {
             Cadastrar
           </button>
           <div className="text-center">
-            {status ? <p> {status} <br/>Faça o login clicando <Link to="/login">aqui</Link>!</p> : <span>Se já tiver uma conta, <br/> clique <Link to="/login">aqui</Link> para fazer login</span>}
+            {status ? (
+              <p>
+                {" "}
+                {status} <br />
+                Faça o login clicando <Link to="/login">aqui</Link>!
+              </p>
+            ) : (
+              <span>
+                Se já tiver uma conta, <br /> clique{" "}
+                <Link to="/login">aqui</Link> para fazer login
+              </span>
+            )}
           </div>
         </form>
       </div>
