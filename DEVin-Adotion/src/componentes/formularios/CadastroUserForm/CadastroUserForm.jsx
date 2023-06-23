@@ -15,7 +15,6 @@ export default function CadastroForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [status, setStatus] = useState("");
   const { createData } = useFetch("https://localhost:8080/usuarios");
-  const { createData } = useFetch("http://localhost:8080/usuarios");
 
   let userEmail = localStorage.getItem("email");
 
