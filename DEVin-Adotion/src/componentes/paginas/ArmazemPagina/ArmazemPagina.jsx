@@ -3,20 +3,13 @@ import { useFetch } from "../../../hooks/useFetch";
 import { CadastroArmazemForm } from "../../formularios";
 
 export default function ArmazemPagina() {
-    const { itens: armazens, deleteData, updateData } = useFetch("http://localhost:3000/armazens");
+    const { itens: armazens, updateData } = useFetch("http://localhost:8080/armazem");
     const [editingItemId, setEditingItemId] = useState(null);
     const [armazensList, setArmazensList] = useState([]);
 
     useEffect(() => {
         setArmazensList(armazens);
     }, [armazens]);
-
-    function handleDelete(id) {
-        setArmazensList((prevArmazens) =>
-            prevArmazens.filter((item) => item.id !== id)
-        );
-        deleteData(id);
-    }
 
     function handleEdit(id) {
         setEditingItemId(id);
@@ -56,7 +49,7 @@ export default function ArmazemPagina() {
             ...armazem,
             situacao: !armazem.situacao,
         };
-        updateData(id, updatedArmazem)
+        updateData(`desativar/${id}`, updatedArmazem)
             .catch((error) => {
                 console.error("Erro ao atualizar o item:", error);
             });
@@ -107,9 +100,7 @@ export default function ArmazemPagina() {
                                         <td>{item.animal}</td>
                                     )}
                                     <td>
-                                        <button onClick={() => handleToggleStatus(item.id)}>
-                                            {item.situacao ? "Disponivel" : "Indisponivel"}
-                                        </button>
+                                        {item.situacao ? "Disponivel" : "Indisponivel"}
                                     </td>
                                     <td>
                                         {isEditing ? (
@@ -127,12 +118,22 @@ export default function ArmazemPagina() {
                                                 >
                                                     Editar
                                                 </button>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => handleDelete(item.id)}
-                                                >
-                                                    Remover
-                                                </button>
+                                                {item.situacao === true ? (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleToggleStatus(item.id)}
+                                                    >
+                                                        Desativar
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        type="button"
+                                                        disabled
+                                                    >
+                                                        Desativar
+                                                    </button>
+                                                )
+                                                }
                                             </>
                                         )}
                                     </td>
