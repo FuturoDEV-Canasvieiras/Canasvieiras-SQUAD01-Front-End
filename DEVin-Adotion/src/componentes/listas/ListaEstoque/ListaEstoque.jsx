@@ -25,13 +25,13 @@ export default function ListaEstoque() {
     }
 
     function handleSave(id) {
-        const categoriaElement = document.getElementById(`categoria-${id}`);
+        const produtoElement = document.getElementById(`produto-${id}`);
         const quantidadeElement = document.getElementById(`quantidade-${id}`);
         const produto = produtosList.find((item) => item.id === id);
 
         const updatedProduto = {
             ...produto,
-            categoria: categoriaElement.value,
+            produto: produtoElement.value,
             quantidade: quantidadeElement.value,
         };
 
@@ -72,20 +72,21 @@ export default function ListaEstoque() {
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
                                     <td>{nome}</td>
-                                    <td>{item.produto}</td>
                                     <td>
                                         {isEditing ? (
                                             <select
-                                                id={`categoria-${item.id}`}
-                                                defaultValue={item.categoria}
+                                                id={`produto-${item.id}`}
+                                                defaultValue={item.produto}
                                             >
-                                                <option value="adulto">Adulto</option>
-                                                <option value="filhote">Filhote</option>
+                                                <option value="racao">Ração</option>
+                                                <option value="antiparasitario">Antiparasitário</option>
+                                                <option value="antipulgas">Antipulgas</option>
                                             </select>
                                         ) : (
-                                            item.categoria
+                                            <td>{item.produto}</td>
                                         )}
                                     </td>
+                                    <td>{item.categoria}</td>
                                     <td>
                                         {isEditing ? (
                                             <input

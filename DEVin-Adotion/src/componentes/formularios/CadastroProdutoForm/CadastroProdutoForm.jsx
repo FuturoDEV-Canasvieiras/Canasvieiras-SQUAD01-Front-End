@@ -37,9 +37,13 @@ export default function CadastroProdutoForm() {
     handleChange(event);
   };
   const handleSubmit = (event) => {
-    event.preventDefault();
-    createData(convertToJSON(selectedArmazem));
-    resetForm();
+    const confirmSubmit = () => window.alert("Item cadastrado com sucesso!")
+    if (event) {
+      event.preventDefault();
+      createData(convertToJSON(selectedArmazem));
+      resetForm();
+      confirmSubmit();
+    }
   };
 
   const convertToJSON = (selectedArmazem) => {
