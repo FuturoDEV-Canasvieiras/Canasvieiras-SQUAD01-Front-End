@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "../../../hooks/useForm";
 import { fetchLoginData } from "../../../hooks/useFetch";
 import NavbarInSystem from "../../paginas/Navbar/NavbarInSystem";
@@ -8,6 +7,7 @@ import CachorroLogin from "../../../imagens/cachorro-login.png";
 import Rodape from "../../rodape/rodape";
 
 export default function LoginFormulario() {
+  const navigate = useNavigate();
   const { handleChange, form, resetForm } = useForm({
     senha: "",
     email: "",

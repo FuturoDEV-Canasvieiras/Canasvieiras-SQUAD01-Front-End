@@ -12,7 +12,6 @@ export const fetchLoginData = async (data) => {
   return {...json, success: response.ok};
 };
 
-
 export const useFetch = (url) => {
   const [itens, setItens] = useState([]);
 
