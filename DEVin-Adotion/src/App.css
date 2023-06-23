@@ -78,3 +78,9 @@
   color: #941c1c;
   font-weight: bold;
 }
+
+.border-primary,
+.h1-primary {
+  border-color: #2c393b !important;
+  color: #2c393b;
+}

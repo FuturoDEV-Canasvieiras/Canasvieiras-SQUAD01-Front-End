@@ -111,6 +111,7 @@ export default function CadastroForm() {
               </span>
             )}
           </div>
+          <br />
         </form>
       </div>
     </>
