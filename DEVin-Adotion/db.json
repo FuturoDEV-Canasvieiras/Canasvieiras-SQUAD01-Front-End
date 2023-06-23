@@ -1,19 +1,6 @@
 {
   "produtos": [
     {
-      "produto": "racao",
-      "quantidade": "1",
-      "animal": "cachorro",
-      "categoria": "adulto",
-      "armazem": {
-        "nome": "Armazem 2",
-        "animal": "cachorro",
-        "situacao": true,
-        "id": 8
-      },
-      "id": 9
-    },
-    {
       "produto": "antipulgas",
       "quantidade": "3",
       "animal": "cachorro",
