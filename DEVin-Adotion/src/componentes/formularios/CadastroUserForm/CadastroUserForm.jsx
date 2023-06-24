@@ -11,9 +11,10 @@ export default function CadastroUserForm() {
     senha: "",
     email: "",
   });
-  const { itens: usuarios, createData } = useFetch("http://localhost:8080/usuario/cadastro");
+  const { itens: usuarios, createData } = useFetch(
+    "http://localhost:8080/usuario/cadastro"
+  );
   const navigate = useNavigate();
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,17 +38,21 @@ export default function CadastroUserForm() {
         if (response.status === 200 || 201) {
           alert("Usuário cadastrado com sucesso!");
         } else {
-          alert("Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente.");
+          alert(
+            "Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente."
+          );
         }
       })
       .catch((error) => {
         console.error("Erro ao cadastrar o usuário:", error);
-        alert("Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente.");
+        alert(
+          "Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente."
+        );
       });
 
     resetForm();
-    navigate("/login")
-  }
+    navigate("/login");
+  };
 
   return (
     <>
@@ -100,6 +105,15 @@ export default function CadastroUserForm() {
           >
             Cadastrar
           </button>
+          <div className="text-center">
+            <span>
+              Tem um usuário? Clique{" "}
+              <a href="/login">
+                <strong>aqui</strong>
+              </a>{" "}
+              para entrar!
+            </span>
+          </div>
         </form>
       </div>
     </>

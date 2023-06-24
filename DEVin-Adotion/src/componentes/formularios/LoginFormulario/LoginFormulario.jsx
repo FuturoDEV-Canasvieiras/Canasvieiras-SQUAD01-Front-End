@@ -83,6 +83,16 @@ export default function LoginFormulario() {
           >
             Entrar
           </button>
+          <div className="text-center">
+            <span>
+              {" "}
+              Não tem um usuário? Clique{" "}
+              <a href="/cadastro-usuario">
+                <strong>aqui</strong>
+              </a>{" "}
+              para se cadastrar!
+            </span>
+          </div>
         </form>
       </div>
     </>

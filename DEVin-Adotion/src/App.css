@@ -26,6 +26,11 @@
   border-color: #1c8294;
 }
 
+.btn-outline-danger {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 .formulario-borda {
   border: 1px solid #ccc;
   border-radius: 5px;
