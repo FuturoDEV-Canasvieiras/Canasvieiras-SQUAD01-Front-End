@@ -11,6 +11,7 @@ import {
   CadastroUserPagina,
   EstoquePagina,
 } from "./componentes/paginas";
+import Rodape from "./componentes/rodape/rodape";
 
 export default function App() {
   return (

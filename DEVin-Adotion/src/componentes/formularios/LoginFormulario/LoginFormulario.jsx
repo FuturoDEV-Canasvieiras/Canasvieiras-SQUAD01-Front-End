@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "../../../hooks/useForm";
 import { useFetch } from "../../../hooks/useFetch";
 import CachorroLogin from "../../../imagens/cachorro-login.png";
-import Rodape from "../../rodape/rodape";
 
 export default function LoginFormulario() {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ export default function LoginFormulario() {
     email: "",
   });
 
-  const { createData } = useFetch('http://localhost:8080/usuario/login');
+  const { createData } = useFetch("http://localhost:8080/usuario/login");
 
   //limpar o localstorage ao entrar na tela de login
   localStorage.clear("usuario");
@@ -28,7 +27,7 @@ export default function LoginFormulario() {
     createData(form)
       .then((response) => {
         if (response.status === 200 || 201) {
-          navigate("/dashboard")
+          navigate("/dashboard");
           localStorage.setItem("usuario", JSON.stringify(response));
         } else {
           alert("Erro ao entrar, verifique suas credenciais.");
@@ -40,7 +39,6 @@ export default function LoginFormulario() {
       });
     resetForm();
   };
-
 
   return (
     <>
@@ -90,8 +88,3 @@ export default function LoginFormulario() {
     </>
   );
 }
-
-
-
-
-

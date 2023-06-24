@@ -1,9 +1,15 @@
-import { useFetch } from '../../../hooks/useFetch'
-import { useForm } from '../../../hooks/useForm'
+import { useFetch } from "../../../hooks/useFetch";
+import { useForm } from "../../../hooks/useForm";
 
 export default function CadastroArmazemForm() {
-  const { handleChange, form, resetForm } = useForm({ nome: "", animal: "", situacao: true })
-  const { itens: armazens, createData } = useFetch("http://localhost:8080/armazem")
+  const { handleChange, form, resetForm } = useForm({
+    nome: "",
+    animal: "",
+    situacao: true,
+  });
+  const { itens: armazens, createData } = useFetch(
+    "http://localhost:8080/armazem"
+  );
 
   const handleSubmit = () => {
     if (form.nome.trim().length === 0) {
@@ -18,28 +24,58 @@ export default function CadastroArmazemForm() {
 
     createData(form);
     resetForm();
-  }
+  };
 
   return (
-    <>
-      <h1>Cadastro Armazém</h1>
-      <form onSubmit={handleSubmit}>
-        Armazém:<br />
-        <input
-          type="text"
-          name="nome"
-          value={form.nome}
-          onChange={handleChange}
-          minLength={3}
-        /><br />
-        <label htmlFor="animal">Animal:</label><br />
-        <select name="animal" value={form.animal} onChange={handleChange}>
-          <option value="" disabled>Selecione o Estoque</option>
-          <option value="gato">Gato</option>
-          <option value="cachorro">Cachorro</option>
-        </select><br />
-        <button type="submit">Cadastrar</button>
-      </form>
-    </>
-  )
+    <div style={{ display: "flex", justifyContent: "left" }}>
+      <div className="form-container col-12">
+        <h1>Cadastro Armazém</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="nome" className="form-label">
+              Armazém:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              name="nome"
+              value={form.nome}
+              onChange={handleChange}
+              minLength={3}
+              placeholder="Digite um nome para o armazém"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="animal" className="form-label">
+              Animal:
+            </label>
+            <select
+              className="form-control"
+              name="animal"
+              value={form.animal}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Selecione o Estoque
+              </option>
+              <option value="gato">Gato</option>
+              <option value="cachorro">Cachorro</option>
+            </select>
+          </div>
+        </form>
+        <div className="text-right">
+          <button
+            type="submit"
+            className="btn btn-outline-danger mr-2"
+            onClick={resetForm}
+          >
+            Limpar
+          </button>
+          <button type="submit" className="btn btn-success">
+            Cadastrar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -3,7 +3,9 @@ import { useFetch } from "../../../hooks/useFetch";
 import { CadastroArmazemForm } from "../../formularios";
 
 export default function ArmazemPagina() {
-  const { itens: armazens, updateData } = useFetch("http://localhost:8080/armazem");
+  const { itens: armazens, updateData } = useFetch(
+    "http://localhost:8080/armazem"
+  );
   const { itens: produtos } = useFetch("http://localhost:8080/estoque");
   const [produtosList, setProdutosList] = useState([]);
   const [editingItemId, setEditingItemId] = useState(null);
@@ -48,7 +50,9 @@ export default function ArmazemPagina() {
     );
 
     if (hasProducts) {
-      alert("Não é possível desativar o armazém. Existem produtos vinculados a ele.");
+      alert(
+        "Não é possível desativar o armazém. Existem produtos vinculados a ele."
+      );
       return;
     }
 
@@ -63,10 +67,9 @@ export default function ArmazemPagina() {
       situacao: !armazem.situacao,
     };
 
-    updateData(`desativar/${id}`, updatedArmazem)
-      .catch((error) => {
-        console.error("Erro ao atualizar o item:", error);
-      });
+    updateData(`desativar/${id}`, updatedArmazem).catch((error) => {
+      console.error("Erro ao atualizar o item:", error);
+    });
   }
 
   return (
@@ -123,7 +126,10 @@ export default function ArmazemPagina() {
                       </button>
                     ) : (
                       <>
-                        <button type="button" onClick={() => handleEdit(item.id)}>
+                        <button
+                          type="button"
+                          onClick={() => handleEdit(item.id)}
+                        >
                           Editar
                         </button>
                         {item.situacao === true ? (

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useFetch } from '../../../hooks/useFetch';
-import { useForm } from '../../../hooks/useForm';
+import React, { useEffect, useState } from "react";
+import { useFetch } from "../../../hooks/useFetch";
+import { useForm } from "../../../hooks/useForm";
 
 export default function CadastroProdutoForm() {
   const { handleChange, form, resetForm } = useForm({
@@ -8,12 +8,13 @@ export default function CadastroProdutoForm() {
     quantidade: 0,
     animal: "",
     categoria: "",
-    armazem: ""
+    armazem: "",
   });
 
-  const { createData } = useFetch('http://localhost:8080/estoque');
-  const { itens: armazens, error } = useFetch('http://localhost:8080/armazem');
+  const { createData } = useFetch("http://localhost:8080/estoque");
+  const { itens: armazens, error } = useFetch("http://localhost:8080/armazem");
   const [selectedArmazem, setSelectedArmazem] = useState(null);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     armazensAbertos();
@@ -21,14 +22,18 @@ export default function CadastroProdutoForm() {
 
   const armazensAbertos = () => {
     if (!error && armazens) {
-      const armazensDisponiveis = armazens.filter((item) => item.situacao === true);
+      const armazensDisponiveis = armazens.filter(
+        (item) => item.situacao === true
+      );
       return armazensDisponiveis;
     }
     return [];
   };
 
   const handleArmazemChange = (event) => {
-    const selectedArmazem = armazens.find((item) => item.id == event.target.value);
+    const selectedArmazem = armazens.find(
+      (item) => item.id == event.target.value
+    );
     setSelectedArmazem(selectedArmazem);
     handleChange(event);
   };
@@ -40,19 +45,24 @@ export default function CadastroProdutoForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     createData(convertToJSON(selectedArmazem))
-    .then((response) => {
-      if (response.status === 200 || 201) {
-        alert("Item cadastrado com sucesso!");
-      } else {
-        alert("Erro ao cadastrar o item. Por favor, verifique os dados e tente novamente.");
-      }
-    })
-    .catch((error) => {
-      console.error("Erro ao cadastrar o item:", error);
-      alert("Erro ao cadastrar o item. Por favor, verifique os dados e tente novamente.");
-    });
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          alert("Item cadastrado com sucesso!");
+          setSubmitError("");
+        } else {
+          setSubmitError(
+            "Erro ao cadastrar o item. Por favor, verifique os dados e tente novamente."
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao cadastrar o item:", error);
+        setSubmitError(
+          "Erro ao cadastrar o item. Por favor, verifique os dados e tente novamente."
+        );
+      });
 
-  resetForm();
+    resetForm();
   };
 
   const convertToJSON = (selectedArmazem) => {
@@ -62,45 +72,105 @@ export default function CadastroProdutoForm() {
       quantidade,
       animal,
       categoria,
-      armazem: { ...selectedArmazem }
+      armazem: { ...selectedArmazem },
     };
   };
 
   return (
-    <>
-      <h1>Cadastro Estoque</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='armazem'>Armazenamento:</label><br />
-        <select name='armazem' value={form.armazem} onChange={handleArmazemChange}>
-          <option value="" disabled>Selecione o Armazém</option>
-          {armazensAbertos().map((item) => {
-            return (
-              <option key={item.id} value={item.id}>{item.nome}</option>
-            );
-          })}
-        </select><br />
-        <label htmlFor='produto'>Produto:</label><br />
-        <select name='produto' value={form.produto} onChange={handleChange}>
-          <option value="" disabled>Selecione o Produto</option>
-          <option value="racao">Ração</option>
-          <option value="antiparasitario">Antiparasitário</option>
-          <option value="antipulgas">Antipulgas</option>
-        </select><br />
-        <label htmlFor='quantidade'>Quantidade:</label><br />
-        <input type="number" name="quantidade" min={0} value={form.quantidade} onChange={handleChange} /><br />
-        <label htmlFor='animal'>Animal:</label><br />
-        <select name='animal' value={form.animal} onChange={handleAnimalChange}>
-          <option value="" disabled>Selecione o Animal</option>
-          {selectedArmazem && <option value={selectedArmazem.animal}>{selectedArmazem.animal}</option>}
-        </select><br />
-        <label htmlFor='categoria'>Categoria:</label><br />
-        <select name='categoria' value={form.categoria} onChange={handleChange}>
-          <option value="" disabled>Selecione a Categoria</option>
-          <option value="adulto">Adulto</option>
-          <option value="filhote">Filhote</option>
-        </select><br />
-        <button type="submit" className="button-form">Cadastrar</button>
-      </form>
-    </>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className="form-container col-4">
+        <h1>Cadastro Estoque</h1>
+        <form onSubmit={handleSubmit}>
+          {submitError && (
+            <div style={{ color: "red", marginBottom: "1rem" }}>
+              {submitError}
+            </div>
+          )}
+          <div className="form-group">
+            <label htmlFor="armazem">Armazenamento:</label>
+            <select
+              name="armazem"
+              value={form.armazem}
+              onChange={handleArmazemChange}
+              className="form-control"
+            >
+              <option value="" disabled>
+                Selecione o Armazém
+              </option>
+              {armazensAbertos().map((item) => {
+                return (
+                  <option key={item.id} value={item.id}>
+                    {item.nome}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="produto">Produto:</label>
+            <select
+              name="produto"
+              value={form.produto}
+              onChange={handleChange}
+              className="form-control"
+            >
+              <option value="" disabled>
+                Selecione o Produto
+              </option>
+              <option value="racao">Ração</option>
+              <option value="antiparasitario">Antiparasitário</option>
+              <option value="antipulgas">Antipulgas</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="quantidade">Quantidade:</label>
+            <input
+              type="number"
+              name="quantidade"
+              min={0}
+              value={form.quantidade}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="animal">Animal:</label>
+            <select
+              name="animal"
+              value={form.animal}
+              onChange={handleAnimalChange}
+              className="form-control"
+            >
+              <option value="" disabled>
+                Selecione o Animal
+              </option>
+              {selectedArmazem && (
+                <option value={selectedArmazem.animal}>
+                  {selectedArmazem.animal}
+                </option>
+              )}
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="categoria">Categoria:</label>
+            <select
+              name="categoria"
+              value={form.categoria}
+              onChange={handleChange}
+              className="form-control"
+            >
+              <option value="" disabled>
+                Selecione a Categoria
+              </option>
+              <option value="adulto">Adulto</option>
+              <option value="filhote">Filhote</option>
+            </select>
+          </div>
+          <button type="submit" className="btn btn-success w-100">
+            Cadastrar
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
