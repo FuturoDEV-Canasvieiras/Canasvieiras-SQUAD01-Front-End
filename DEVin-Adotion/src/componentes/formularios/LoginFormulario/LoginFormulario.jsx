@@ -11,7 +11,10 @@ export default function LoginFormulario() {
     email: "",
   });
 
-  const { createData } = useFetch('http://localhost:8080/usuarios/login');
+  const { createData } = useFetch('http://localhost:8080/usuario/login');
+
+  //limpar o localstorage ao entrar na tela de login
+  localStorage.clear("usuario");
 
   const handleSubmit = (event) => {
     event.preventDefault();

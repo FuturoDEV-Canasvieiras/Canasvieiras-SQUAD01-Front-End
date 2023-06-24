@@ -11,8 +11,9 @@ export default function CadastroUserForm() {
     senha: "",
     email: "",
   });
-  const { itens: usuarios, createData } = useFetch("http://localhost:8080/usuarios");
+  const { itens: usuarios, createData } = useFetch("http://localhost:8080/usuario/cadastro");
   const navigate = useNavigate();
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
