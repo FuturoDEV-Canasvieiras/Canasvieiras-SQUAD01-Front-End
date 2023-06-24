@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../../hooks/useForm";
+import { useFetch } from "../../../hooks/useFetch";
 import CachorroLogin from "../../../imagens/cachorro-login.png";
 import Rodape from "../../rodape/rodape";
-import { useFetch } from "../../../hooks/useFetch";
 
 export default function LoginFormulario() {
   const navigate = useNavigate();
@@ -24,7 +24,6 @@ export default function LoginFormulario() {
     }
     createData(form)
       .then((response) => {
-        console.log(response);
         if (response.status === 200 || 201) {
           navigate("/dashboard")
           localStorage.setItem("usuario", JSON.stringify(response));
