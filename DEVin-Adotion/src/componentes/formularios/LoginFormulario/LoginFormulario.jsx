@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../../hooks/useForm";
-import { fetchLoginData } from "../../../hooks/useFetch";
-import NavbarInSystem from "../../paginas/Navbar/NavbarInSystem";
 import CachorroLogin from "../../../imagens/cachorro-login.png";
 import Rodape from "../../rodape/rodape";
+import { useFetch } from "../../../hooks/useFetch";
 
 export default function LoginFormulario() {
   const navigate = useNavigate();
@@ -12,40 +10,42 @@ export default function LoginFormulario() {
     senha: "",
     email: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [status, setStatus] = useState("");
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetchLoginData(form);
-      if (response && response.success) {
-        setStatus("Login bem sucedido!");
-      } else {
-        setStatus("Credenciais inválidas.");
-      }
-    } catch (error) {
-      setStatus("Ocorreu um erro ao processar a solicitação");
-    }
-  };
+  const { createData } = useFetch('http://localhost:8080/usuarios/login');
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (!form.email || !form.senha) {
-      setErrorMessage("Por favor, preencha todos os campos!");
+    if (form.email.trim().length === 0) {
+      alert("O e-mail do usuário não pode ser vazio ou em branco");
+      return;
+    } else if (form.senha.trim().length === 0) {
+      alert("A senha do usuário não pode ser vazia ou em branco");
       return;
     }
-
-    handleLogin();
+    createData(form)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200 || 201) {
+          navigate("/dashboard")
+          localStorage.setItem("usuario", JSON.stringify(response));
+        } else {
+          alert("Erro ao entrar, verifique suas credenciais.");
+        }
+      })
+      .catch((error) => {
+        alert("Erro ao entrar: email ou senha incorreto(s).");
+        console.log(error);
+      });
     resetForm();
   };
+
 
   return (
     <>
       <div
         className="d-flex justify-content-center align-items-center full-height"
         style={{ height: "100%" }}
-        main
+        main="true"
       >
         <img
           src={CachorroLogin}
@@ -58,9 +58,6 @@ export default function LoginFormulario() {
           id="FormularioLoginUsuario"
         >
           <h1 className="text-center">Login</h1>
-          {errorMessage && (
-            <p className="text-center text-erro">{errorMessage}</p>
-          )}
           <label htmlFor="email">E-mail:</label>
           <br />
           <input
@@ -86,16 +83,13 @@ export default function LoginFormulario() {
           >
             Entrar
           </button>
-          <div className="text-center">
-            <span>
-              Se não tiver uma conta, <br /> clique{" "}
-              <Link to="/cadastro-usuario">aqui</Link> para fazer o cadastro
-            </span>
-          </div>
-          {status && <p>{status}</p>}
-          {status === "Login bem sucedido!" && <NavbarInSystem />}
         </form>
       </div>
     </>
   );
 }
+
+
+
+
+
