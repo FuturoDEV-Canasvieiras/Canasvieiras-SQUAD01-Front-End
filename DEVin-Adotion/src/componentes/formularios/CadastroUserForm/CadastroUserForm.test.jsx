@@ -1,17 +1,29 @@
-import { render, screen } from '@testing-library/react';
+import {render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import CadastroUserForm from './CadastroUserForm';
+import { useFetch } from "../../../hooks/useFetch";
 import userEvent from '@testing-library/user-event';
 import {vi} from 'vitest'
 
-const mockCreateData = vi.fn();
-vi.mock("../../../hooks/useFetch", () => ({
-  useFetch: () => ({
-    createData: mockCreateData,
-  }),
-}));
+vi.mock("../../../hooks/useFetch");
+let originalAlert;
+
+    beforeEach(() => {
+      originalAlert = window.alert; 
+      window.alert = vi.fn(); 
+    });
+
+    afterEach(() => {
+      window.alert = originalAlert;
+    });
 describe('Teste do componente CadastroUserForm', () => {
     test('Deve renderizar o componente sem erros', () => {
+      const mockCreateData = vi.fn();
+      useFetch.mockReturnValue({
+        itens: [],
+        createData: mockCreateData,
+      });
+
         render(
             <BrowserRouter>
             <CadastroUserForm />
@@ -21,64 +33,155 @@ describe('Teste do componente CadastroUserForm', () => {
           expect(linkElement).toBeInTheDocument();
     });
 
-    test('Deve exibir o texto "Se já tiver uma conta..."', () => {
-        render(<BrowserRouter>
-            <CadastroUserForm />
-          </BrowserRouter>);
-        const linkElement = screen.getByText(/Se já tiver uma conta/i);
-        expect(linkElement).toBeInTheDocument();
+    test("exibe erro se o nome estiver em branco", async () => {
+      const mockCreateData = vi.fn();
+      useFetch.mockReturnValue({
+        itens: [],
+        createData: mockCreateData,
+      });
+      const user = userEvent.setup()
+      render(
+        <BrowserRouter>
+        <CadastroUserForm />
+      </BrowserRouter>
+      );
+  
+      const cadastrarButton = screen.getByText("Cadastrar");
+      await user.click(cadastrarButton);
+  
+      expect(window.alert).toHaveBeenCalledWith(
+        "O nome do usuário não pode ser vazio ou em branco"
+      )
     });
 
-    test('Caso o formulário seja submetido com um campo vazio, deve exibir a mensagem Por favor, preencha todos os campos', async () => {
-        const user = userEvent.setup()
-        render(<BrowserRouter>
-            <CadastroUserForm />
-          </BrowserRouter>);
-        const button = screen.getByRole('button', { name: /Cadastrar/i });
-        user.click(button);
-        const alert = await screen.findByText(/Por favor, preencha todos os campos/i);
-        expect(alert).toBeInTheDocument();
+    test("exibe erro se o email estiver em branco", async () => {
+      const mockCreateData = vi.fn();
+      useFetch.mockReturnValue({
+        itens: [],
+        createData: mockCreateData,
+      });
+      render(
+        <BrowserRouter>
+          <CadastroUserForm />
+        </BrowserRouter>
+      );
+  
+      const nomeInput = await screen.findByPlaceholderText("Exemplo: João da Silva Pereira");
+      await userEvent.type(nomeInput, "João da Silva Pereira");
+  
+      const cadastrarButton = screen.getByText("Cadastrar");
+      await userEvent.click(cadastrarButton);
+  
+      expect(window.alert).toHaveBeenCalledWith("O email do usuário não pode ser vazio ou em branco");
     });
       
-
-    test('Caso o formulário seja submetido com sucesso, deve exibir a mensagem "Cadastro bem sucedido!"', async () => {
-        const user = userEvent.setup()
-        render(<BrowserRouter>
-            <CadastroUserForm />
-          </BrowserRouter>);
-        const nome = screen.getByText(/Nome/i);
-        user.type(nome, 'João da Silva Pereira');
-        const email = screen.getByText(/E-mail/i);
-        user.type(email, 'joao@email.com');
-        const senha = screen.getByText(/Senha/i);
-        user.type(senha, '123456');
-
-        const button = screen.getByRole('button', { name: /Cadastrar/i });
-        user.click(button);
-
-        const alert = await screen.findByText(/Cadastro/i);
-        expect(alert).toBeInTheDocument();
+    test("exibe erro se a senha estiver em branco", async () => {
+      const mockCreateData = vi.fn();
+      useFetch.mockReturnValue({
+        itens: [],
+        createData: mockCreateData,
+      });
+      render(
+        <BrowserRouter>
+          <CadastroUserForm />
+        </BrowserRouter>
+      )
+  
+      const nomeInput = await screen.findByPlaceholderText("Exemplo: João da Silva Pereira");
+      await userEvent.type(nomeInput, "João da Silva Pereira");
+  
+      const emailInput = await screen.findByPlaceholderText("E-mail");
+      await userEvent.type(emailInput, "email@email.com");
+  
+      const cadastrarButton = screen.getByText("Cadastrar");
+      await userEvent.click(cadastrarButton);
+  
+      expect(window.alert).toHaveBeenCalledWith("A senha do usuário não pode estar vazia");
     });
 
-    test('Caso o formulário seja submetido e o email já tiver sido cadastrado, deve exibir a mensagem "Este e-mail já está cadastrado."', async () => {
-        const user = userEvent.setup()
-        render(<BrowserRouter>
-            <CadastroUserForm />
-          </BrowserRouter>);
+    
 
-        const nome = screen.getByText(/Nome/i);
-        user.type(nome, 'João da Silva Pereira');
-        const email = screen.getByText(/E-mail/i);
-        user.type(email, 'joao@email.com');
-        const senha = screen.getByText(/Senha/i);
-        user.type(senha, '123456');
+    test("exibe mensagem de sucesso ao cadastrar usuário", async () => {
+      useFetch.mockReturnValue({
+        itens: [],
+        createData: vi.fn().mockResolvedValue({ status: 201 }),
+      });
+  
+      render(
+        <BrowserRouter>
+          <CadastroUserForm />
+        </BrowserRouter>
+      );
+  
+      const nomeInput = await screen.findByPlaceholderText("Exemplo: João da Silva Pereira");
+      const emailInput = await screen.findByPlaceholderText("E-mail");
+      const senhaInput = await screen.findByPlaceholderText("Digite uma senha");
+  
+      await userEvent.type(nomeInput, "João da Silva Pereira");
+      await userEvent.type(emailInput, "joao@example.com");
+      await userEvent.type(senhaInput, "senha123");
+  
+      const cadastrarButton = screen.getByText("Cadastrar");
+      await userEvent.click(cadastrarButton);
+  
+      
+      expect(window.alert).toHaveBeenCalledWith("Usuário cadastrado com sucesso!");
+    });
 
-        const button = screen.getByRole('button', { name: /Cadastrar/i });
-        await user.click(button);
+    test("exibe mensagem de erro ao cadastrar usuário", async () => {
+      useFetch.mockReturnValue({
+        itens: [],
+        createData: vi.fn().mockRejectedValue({ status: 400 }),
+      });
+  
+      render(
+        <BrowserRouter>
+          <CadastroUserForm />
+        </BrowserRouter>
+      );
+  
+      const nomeInput = await screen.findByPlaceholderText("Exemplo: João da Silva Pereira");
+      const emailInput = await screen.findByPlaceholderText("E-mail");
+      const senhaInput = await screen.findByPlaceholderText("Digite uma senha");
+  
+      await userEvent.type(nomeInput, "João da Silva Pereira");
+      await userEvent.type(emailInput, "joao@example.com");
+      await userEvent.type(senhaInput, "senha123");
+  
+      const cadastrarButton = screen.getByText("Cadastrar");
+      await userEvent.click(cadastrarButton);
+  
+      
+      expect(window.alert).toHaveBeenCalledWith("Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente.");
+    });
 
-        const alert = await screen.findByText(/Este e-mail já está cadastrado./i);
-        expect(alert).toBeInTheDocument();
-
+    test("exibe mensagem de erro ao cadastrar usuário com email já existente", async () => {
+      useFetch.mockReturnValue({
+        itens: [
+          { email: "joao@example.com" },
+          { email: "maria@example.com" },
+        ],
+        createData: vi.fn(),
+      });
+  
+      render(
+        <BrowserRouter>
+          <CadastroUserForm />
+        </BrowserRouter>
+      );
+  
+      const nomeInput = await screen.findByPlaceholderText("Exemplo: João da Silva Pereira");
+      const emailInput = await screen.findByPlaceholderText("E-mail");
+      const senhaInput = await screen.findByPlaceholderText("Digite uma senha");
+  
+      await userEvent.type(nomeInput, "João da Silva Pereira");
+      await userEvent.type(emailInput, "joao@example.com");
+      await userEvent.type(senhaInput, "senha123");
+  
+      const cadastrarButton = screen.getByText("Cadastrar");
+      await userEvent.click(cadastrarButton);
+  
+      expect(window.alert).toHaveBeenCalledWith("Já existe um usuário cadastrado com esse email");
     });
 
 })
