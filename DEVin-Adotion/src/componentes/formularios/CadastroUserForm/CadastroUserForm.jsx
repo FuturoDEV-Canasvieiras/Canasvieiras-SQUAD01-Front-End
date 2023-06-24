@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch";
 import { useForm } from "../../../hooks/useForm";
+
 import CachorroLogin from "../../../imagens/cachorro-login.png";
 import Rodape from "../../rodape/rodape";
 
@@ -12,38 +11,43 @@ export default function CadastroUserForm() {
     senha: "",
     email: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [status, setStatus] = useState("");
-  const { createData } = useFetch("https://localhost:8080/usuarios");
+  const { itens: usuarios, createData } = useFetch("http://localhost:8080/usuario/cadastro");
+  const navigate = useNavigate();
 
-  let userEmail = localStorage.getItem("email");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (!form.email || !form.senha || !form.nome) {
-      setErrorMessage("Por favor, preencha todos os campos.");
+    if (form.nome.trim().length === 0) {
+      alert("O nome do usuário não pode ser vazio ou em branco");
       return;
-    } else if (form.email === userEmail) {
-      setErrorMessage("Este e-mail já está cadastrado.");
+    } else if (form.email.trim().length === 0) {
+      alert("O email do usuário não pode ser vazio ou em branco");
       return;
-    } else {
-      setErrorMessage("");
+    } else if (form.senha.trim().length === 0) {
+      alert("A senha do usuário não pode estar vazia");
+      return;
     }
 
-    try {
-      const response = createData(form);
-      if (response) {
-        localStorage.setItem(response.email, JSON.stringify);
-      }
-
-      setStatus("Cadastro bem sucedido!");
-      resetForm();
-    } catch (error) {
-      console.error("Error creating data:", error);
-      setErrorMessage("Ocorreu um erro ao criar o cadastro.");
+    if (usuarios.some((usuario) => usuario.email === form.email)) {
+      alert("Já existe um usuário cadastrado com esse email");
+      return;
     }
-  };
+    createData(form)
+      .then((response) => {
+        if (response.status === 200 || 201) {
+          alert("Usuário cadastrado com sucesso!");
+        } else {
+          alert("Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente.");
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao cadastrar o usuário:", error);
+        alert("Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente.");
+      });
+
+    resetForm();
+    navigate("/login")
+  }
 
   return (
     <>
@@ -63,7 +67,6 @@ export default function CadastroUserForm() {
         >
           <h1 className="text-center">Cadastro</h1>
           <br />
-          {errorMessage && <p>{errorMessage}</p>}
           <label htmlFor="nomeCompleto">Nome completo:</label>
           <input
             className="form-control my-2"
@@ -97,21 +100,6 @@ export default function CadastroUserForm() {
           >
             Cadastrar
           </button>
-          <div className="text-center">
-            {status ? (
-              <p>
-                {" "}
-                {status} <br />
-                Faça o login clicando <Link to="/login">aqui</Link>!
-              </p>
-            ) : (
-              <span>
-                Se já tiver uma conta, <br /> clique{" "}
-                <Link to="/login">aqui</Link> para fazer login
-              </span>
-            )}
-          </div>
-          <br />
         </form>
       </div>
     </>
