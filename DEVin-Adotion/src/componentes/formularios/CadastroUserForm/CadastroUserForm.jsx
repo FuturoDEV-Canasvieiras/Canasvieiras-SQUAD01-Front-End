@@ -5,7 +5,7 @@ import { useForm } from "../../../hooks/useForm";
 import CachorroLogin from "../../../imagens/cachorro-login.png";
 import Rodape from "../../rodape/rodape";
 
-export default function CadastroForm() {
+export default function CadastroUserForm() {
   const { handleChange, form, resetForm } = useForm({
     nome: "",
     senha: "",
