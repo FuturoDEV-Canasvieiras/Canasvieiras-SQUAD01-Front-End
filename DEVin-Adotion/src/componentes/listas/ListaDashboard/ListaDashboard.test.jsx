@@ -20,7 +20,7 @@ let originalAlert;
 
 
 describe('Teste do componente ListaDashboard', () => {
-    test("Deve renderizar o componeten corretamente", () => {
+    test("Deve renderizar o componente corretamente", () => {
         const mockCreateData = vi.fn();
         useFetch.mockReturnValue({
           itens: []

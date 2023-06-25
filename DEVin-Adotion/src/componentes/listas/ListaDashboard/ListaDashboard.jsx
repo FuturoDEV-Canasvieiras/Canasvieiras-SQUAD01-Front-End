@@ -10,16 +10,16 @@ export default function ListaDashboard() {
       return <div>Erro ao carregar os dados do dashboard</div>;
     } else {
       return (
-        <div class="col-12">
-          <h5 class="card-title ml-5">{primeiraMaiscula(categoria)}</h5>
-          <div class="card border-0">
-            <div class="card-body">
-              <div class="card-text d-flex flex-row text-center">
+        <div className="col-12">
+          <h5 className="card-title ml-5">{primeiraMaiscula(categoria)}</h5>
+          <div className="card border-0">
+            <div className="card-body">
+              <div className="card-text d-flex flex-row text-center">
                 <div
-                  class="card flex-fill border-0 mr-5"
+                  className="card flex-fill border-0 mr-5"
                   style={{ minWidth: "150px", maxHeight: "150px" }}
                 >
-                  <div class="card-body">
+                  <div className="card-body">
                     {animal === "cachorro" ? (
                       <BiSolidDog size={80} />
                     ) : (
@@ -28,36 +28,36 @@ export default function ListaDashboard() {
                   </div>
                 </div>
                 <div
-                  class="card flex-fill mr-5"
+                  className="card flex-fill mr-5"
                   style={{ minWidth: "150px", maxHeight: "150px" }}
                 >
-                  <div class="card-body brilho-dashboard">
-                    <p class="card-text">Kg de Ração</p>
-                    <h5 class="text-text font-weight-bold">
+                  <div className="card-body brilho-dashboard">
+                    <p className="card-text">Kg de Ração</p>
+                    <h5 className="text-text font-weight-bold">
                       {itensDash.mediaRacao}
                     </h5>
                   </div>
                 </div>
-                <div class="card flex-fill mr-5" style={{ minWidth: "150px" }}>
-                  <div class="card-body brilho-dashboard">
-                    <p class="card-text">Antipulgas</p>
-                    <h5 class="text-text font-weight-bold">
+                <div className="card flex-fill mr-5" style={{ minWidth: "150px" }}>
+                  <div className="card-body brilho-dashboard">
+                    <p className="card-text">Antipulgas</p>
+                    <h5 className="text-text font-weight-bold">
                       {itensDash.totalComAntipulgas}
                     </h5>
                   </div>
                 </div>
-                <div class="card flex-fill mr-5" style={{ minWidth: "150px" }}>
-                  <div class="card-body brilho-dashboard">
-                    <p class="card-text">Antiparasitário</p>
-                    <h5 class="text-text font-weight-bold">
+                <div className="card flex-fill mr-5" style={{ minWidth: "150px" }}>
+                  <div className="card-body brilho-dashboard">
+                    <p className="card-text">Antiparasitário</p>
+                    <h5 className="text-text font-weight-bold">
                       {itensDash.totalComAntiparasitario}
                     </h5>
                   </div>
                 </div>
-                <div class="card flex-fill mr-2" style={{ minWidth: "150px" }}>
-                  <div class="card-body brilho-dashboard">
-                    <p class="card-text">{primeiraMaiscula(animal)}</p>
-                    <h5 class="text-text font-weight-bold">
+                <div className="card flex-fill mr-2" style={{ minWidth: "150px" }}>
+                  <div className="card-body brilho-dashboard">
+                    <p className="card-text">{primeiraMaiscula(animal)}</p>
+                    <h5 className="text-text font-weight-bold">
                       {itensDash.total}
                     </h5>
                   </div>
@@ -76,7 +76,7 @@ export default function ListaDashboard() {
 
   return (
     <div className="container">
-      <div class="row">
+      <div className="row">
         {animalCategoria("cachorro", "filhote")}
         {animalCategoria("cachorro", "adulto")}
         {animalCategoria("gato", "filhote")}
