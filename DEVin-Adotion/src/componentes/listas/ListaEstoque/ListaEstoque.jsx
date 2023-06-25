@@ -3,146 +3,144 @@ import { useFetch } from "../../../hooks/useFetch";
 import { BsSdCard, BsTrash, BsPencil } from "react-icons/bs";
 
 export default function ListaEstoque() {
-    const { itens: produtos, deleteData, updateData } = useFetch(
-        "http://localhost:8080/estoque"
+  const {
+    itens: produtos,
+    deleteData,
+    updateData,
+  } = useFetch("http://localhost:8080/estoque");
+
+  const [editingItemId, setEditingItemId] = useState(null);
+  const [produtosList, setProdutosList] = useState([]);
+
+  useEffect(() => {
+    setProdutosList(produtos);
+  }, [produtos]);
+
+  function handleDelete(id) {
+    setProdutosList((prevProdutos) =>
+      prevProdutos.filter((item) => item.id !== id)
     );
+    deleteData(id);
+  }
 
-    const [editingItemId, setEditingItemId] = useState(null);
-    const [produtosList, setProdutosList] = useState([]);
+  function handleEdit(id) {
+    setEditingItemId(id);
+  }
 
-    useEffect(() => {
-        setProdutosList(produtos);
-    }, [produtos]);
+  function handleSave(id) {
+    const produtoElement = document.getElementById(`produto-${id}`);
+    const quantidadeElement = document.getElementById(`quantidade-${id}`);
+    const produto = produtosList.find((item) => item.id === id);
 
-    function handleDelete(id) {
+    const updatedProduto = {
+      ...produto,
+      produto: produtoElement.value,
+      quantidade: quantidadeElement.value,
+    };
+
+    updateData(id, updatedProduto)
+      .then(() => {
+        setEditingItemId(null);
         setProdutosList((prevProdutos) =>
-            prevProdutos.filter((item) => item.id !== id)
+          prevProdutos.map((item) =>
+            item.id === id ? { ...item, ...updatedProduto } : item
+          )
         );
-        deleteData(id);
-    }
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar o item:", error);
+      });
+  }
 
-    function handleEdit(id) {
-        setEditingItemId(id);
-    }
+  return (
+    <div className="container">
+      <table className="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Armazém</th>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Quantidade</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {produtosList ? (
+            produtosList.map((item) => {
+              const { nome } = item.armazem || {};
+              const isEditing = item.id === editingItemId;
 
-    function handleSave(id) {
-        const produtoElement = document.getElementById(`produto-${id}`);
-        const quantidadeElement = document.getElementById(`quantidade-${id}`);
-        const produto = produtosList.find((item) => item.id === id);
-
-        const updatedProduto = {
-            ...produto,
-            produto: produtoElement.value,
-            quantidade: quantidadeElement.value,
-        };
-
-        updateData(id, updatedProduto)
-            .then(() => {
-                setEditingItemId(null);
-                setProdutosList((prevProdutos) =>
-                    prevProdutos.map((item) =>
-                        item.id === id ? { ...item, ...updatedProduto } : item
-                    )
-                );
-            })
-            .catch((error) => {
-                console.error("Erro ao atualizar o item:", error);
-            });
-    }
-
-    return (
-        <div className="container">
-            <table className="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Armazém</th>
-                        <th>Produto</th>
-                        <th>Categoria</th>
-                        <th>Quantidade</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {produtosList ? (
-                        produtosList.map((item) => {
-                            const { nome } = item.armazem || {};
-                            const isEditing = item.id === editingItemId;
-
-                            return (
-                                <tr key={item.id}>
-                                    <td>{item.id}</td>
-                                    <td>{nome}</td>
-                                    <td>
-                                        {isEditing ? (
-                                            <select
-                                                id={`produto-${item.id}`}
-                                                defaultValue={item.produto}
-                                            >
-                                                <option value="racao">Ração</option>
-                                                <option value="antiparasitario">Antiparasitário</option>
-                                                <option value="antipulgas">Antipulgas</option>
-                                            </select>
-                                        ) : (
-                                            <td>{item.produto}</td>
-                                        )}
-                                    </td>
-                                    <td>{item.categoria}</td>
-                                    <td>
-                                        {isEditing ? (
-                                            <input
-                                                type="number"
-                                                id={`quantidade-${item.id}`}
-                                                defaultValue={item.quantidade}
-                                                min={0}
-                                            />
-                                        ) : (
-                                            item.quantidade
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        {isEditing ? (
-                                            <button
-                                                type="button"
-                                                className="btn btn-green"
-                                                onClick={() => handleSave(item.id)}
-                                            >
-                                                <BsSdCard
-                                                className="text-white btn-green"
-                                                />
-                                            </button>
-                                        ) : (
-                                            <>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-success"
-                                                    onClick={() => handleEdit(item.id)}
-                                                >
-                                                    <BsPencil 
-                                                    className="text-white bg-success"
-                                                    />
-                                                </button>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-danger"
-                                                    onClick={() => handleDelete(item.id)}
-                                                >
-                                                    <BsTrash 
-                                                    className="text-white bg-danger"
-                                                    />
-                                                </button>
-                                            </>
-                                        )}
-                                    </td>
-                                </tr>
-                            );
-                        })
+              return (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{nome}</td>
+                  <td>
+                    {isEditing ? (
+                      <select
+                        id={`produto-${item.id}`}
+                        defaultValue={item.produto}
+                        className="form-control"
+                      >
+                        <option value="racao">Ração</option>
+                        <option value="antiparasitario">Antiparasitário</option>
+                        <option value="antipulgas">Antipulgas</option>
+                      </select>
                     ) : (
-                        <p>nenhum produto cadastrado ainda</p>
+                      <td>{item.produto}</td>
                     )}
-                </tbody>
-            </table>
-        </div>
-    );
+                  </td>
+                  <td>{item.categoria}</td>
+                  <td>
+                    {isEditing ? (
+                      <input
+                        type="number"
+                        id={`quantidade-${item.id}`}
+                        defaultValue={item.quantidade}
+                        min={0}
+                        className="form-control"
+                      />
+                    ) : (
+                      item.quantidade
+                    )}
+                  </td>
+
+                  <td>
+                    {isEditing ? (
+                      <button
+                        type="button"
+                        className="btn btn-green"
+                        onClick={() => handleSave(item.id)}
+                      >
+                        <BsSdCard className="text-white btn-green" />
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          className="btn btn-success"
+                          onClick={() => handleEdit(item.id)}
+                        >
+                          <BsPencil className="text-white bg-success" />
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-danger"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          <BsTrash className="text-white bg-danger" />
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <p>nenhum produto cadastrado ainda</p>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
 }
