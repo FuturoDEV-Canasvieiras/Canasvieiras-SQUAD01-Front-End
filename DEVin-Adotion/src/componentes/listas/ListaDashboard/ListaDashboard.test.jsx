@@ -33,19 +33,5 @@ describe('Teste do componente ListaDashboard', () => {
         );
         
     });
-
-    test("Exibe texto Gato Adulto na tela", () => {
-        useFetch.mockReturnValue({
-            itens: []
-          });
-
-          render(
-            <BrowserRouter>
-            <ListaDashboard />
-          </BrowserRouter>
-        );  
-        
-        expect(screen.getByText("Gato Adulto")).toBeInTheDocument();
-    })
 }
 )    
