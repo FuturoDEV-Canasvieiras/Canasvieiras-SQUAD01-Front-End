@@ -44,10 +44,11 @@ export default function CadastroProdutoForm() {
   };
 
   const handleSubmit = (event) => {
+    
     event.preventDefault();
     createData(convertToJSON(selectedArmazem))
       .then((response) => {
-        if (response.status === 200 || response.status === 201) {
+        if (response.id !== undefined) {
           alert("Item cadastrado com sucesso!");
           setSubmitError("");
         } 
@@ -96,6 +97,7 @@ export default function CadastroProdutoForm() {
               value={form.armazem}
               onChange={handleArmazemChange}
               className="form-control"
+              required
             >
               <option value="" disabled>
                 Selecione o Armazém
@@ -116,6 +118,7 @@ export default function CadastroProdutoForm() {
               value={form.produto}
               onChange={handleChange}
               className="form-control"
+              required
             >
               <option value="" disabled>
                 Selecione o Produto
@@ -130,7 +133,8 @@ export default function CadastroProdutoForm() {
             <input
               type="number"
               name="quantidade"
-              min={0}
+              min={1}
+              required
               value={form.quantidade}
               onChange={handleChange}
               className="form-control"
@@ -143,6 +147,7 @@ export default function CadastroProdutoForm() {
               value={form.animal}
               onChange={handleAnimalChange}
               className="form-control"
+              required
             >
               <option value="" disabled>
                 Selecione o Animal
@@ -161,6 +166,7 @@ export default function CadastroProdutoForm() {
               value={form.categoria}
               onChange={handleChange}
               className="form-control"
+              required
             >
               <option value="" disabled>
                 Selecione a Categoria
