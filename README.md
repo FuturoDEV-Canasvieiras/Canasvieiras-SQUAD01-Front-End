@@ -37,7 +37,7 @@ Siga as instruções abaixo para iniciar a aplicação do front-end:
    npm run dev
    ```
 
-Após executar o comando acima, a aplicação será iniciada e estará disponível em `http://localhost:3000`.
+Após executar o comando acima, a aplicação será iniciada e estará disponível em `http://localhost:5173`.
 
 ## Uso da aplicação
 
