@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFetch } from "../../../hooks/useFetch";
 import { useForm } from "../../../hooks/useForm";
+import Cachorro from "../../../imagens/cachorro.png";
 
 export default function CadastroProdutoForm() {
   const { handleChange, form, resetForm } = useForm({
@@ -77,8 +78,9 @@ export default function CadastroProdutoForm() {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <div className="form-container col-4">
+    <div style={{ display: "flex" }}>
+      <img src={Cachorro} style={{ height: "500px" }} />
+      <div className="form-container col-4 ">
         <h1>Cadastro Estoque</h1>
         <form onSubmit={handleSubmit}>
           {submitError && (
@@ -169,6 +171,15 @@ export default function CadastroProdutoForm() {
           <button type="submit" className="btn btn-success w-100">
             Cadastrar
           </button>
+
+          <div className="text-center p-2">
+            <span>
+              Ir para{" "}
+              <a href="/produtos-estoque">
+                <strong>estoque</strong>
+              </a>
+            </span>
+          </div>
         </form>
       </div>
     </div>
