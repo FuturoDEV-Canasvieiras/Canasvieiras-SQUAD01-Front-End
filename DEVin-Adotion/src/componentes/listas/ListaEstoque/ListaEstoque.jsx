@@ -112,7 +112,7 @@ export default function ListaEstoque() {
                         className="btn btn-green"
                         onClick={() => handleSave(item.id)}
                       >
-                        <BsSdCard className="text-white btn-green" />
+                        <BsSdCard className="text-white btn-green" title="Salvar" />
                       </button>
                     ) : (
                       <>
@@ -121,14 +121,14 @@ export default function ListaEstoque() {
                           className="btn btn-success"
                           onClick={() => handleEdit(item.id)}
                         >
-                          <BsPencil className="text-white bg-success" />
+                          <BsPencil className="text-white bg-success" title="Editar"/>
                         </button>
                         <button
                           type="button"
                           className="btn btn-danger"
                           onClick={() => handleDelete(item.id)}
                         >
-                          <BsTrash className="text-white bg-danger" />
+                          <BsTrash className="text-white bg-danger" title="Remover"/>
                         </button>
                       </>
                     )}
