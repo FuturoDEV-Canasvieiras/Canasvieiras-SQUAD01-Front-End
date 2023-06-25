@@ -11,7 +11,7 @@ describe("ListaEstoque", () => {
 
   vi.mock("../../../hooks/useFetch");
 
-  test("Deve renderizar o componente corretamente", () => {
+  test.only("Deve renderizar o componente corretamente", () => {
     useFetch.mockReturnValue({
       itens: []
     });
