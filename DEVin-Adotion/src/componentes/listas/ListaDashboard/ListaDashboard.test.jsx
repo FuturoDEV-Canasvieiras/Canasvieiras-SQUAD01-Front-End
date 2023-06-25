@@ -1,10 +1,9 @@
 import {render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import ListaDashboard from './ListaDashboard';
+import ListaDashboard from './ListaDashboard'
 import { useFetch } from "../../../hooks/useFetch";
 import userEvent from '@testing-library/user-event';
 import {describe, expect, test, vi} from 'vitest'
-import { scryRenderedComponentsWithType } from 'react-dom/test-utils';
 
 vi.mock("../../../hooks/useFetch");
 let originalAlert;
