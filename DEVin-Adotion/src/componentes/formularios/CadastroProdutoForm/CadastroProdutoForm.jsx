@@ -50,11 +50,12 @@ export default function CadastroProdutoForm() {
         if (response.status === 200 || response.status === 201) {
           alert("Item cadastrado com sucesso!");
           setSubmitError("");
-        } else {
-          setSubmitError(
-            "Erro ao cadastrar o item. Por favor, verifique os dados e tente novamente."
-          );
-        }
+        } 
+        // else {
+        //   setSubmitError(
+        //     "Erro ao cadastrar o item. Por favor, verifique os dados e tente novamente."
+        //   );
+        // }
       })
       .catch((error) => {
         console.error("Erro ao cadastrar o item:", error);
