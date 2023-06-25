@@ -94,3 +94,11 @@
   background-color: #2dc443 !important;
   border-color: #2dc443 !important;
 }
+
+.brilho-dashboard:hover {
+  border: 2px solid #2499ae;
+}
+
+footer {
+  background-color: ghostwhite;
+}

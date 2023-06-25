@@ -6,8 +6,7 @@ import Rodape from "../../rodape/rodape";
 import { useAuthentication } from "../../../hooks/useAuthentication";
 import { useEffect } from "react";
 
-
-export default function LoginFormulario( ) {
+export default function LoginFormulario() {
   const navigate = useNavigate();
   const { handleChange, form, resetForm } = useForm({
     senha: "",
@@ -16,9 +15,8 @@ export default function LoginFormulario( ) {
 
   // tratamento de autenticação
   const { isLoggedIn, login } = useAuthentication();
-  
- 
-  const { createData } = useFetch('http://localhost:8080/usuario/login');
+
+  const { createData } = useFetch("http://localhost:8080/usuario/login");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,7 +33,6 @@ export default function LoginFormulario( ) {
           login();
           localStorage.setItem("userData", JSON.stringify(response));
           window.location.href = "/dashboard"; // redireciona para a página de dashboard
-          
         } else {
           alert("Erro ao entrar, verifique suas credenciais.");
         }
@@ -46,7 +43,6 @@ export default function LoginFormulario( ) {
       });
     resetForm();
   };
-
 
   return (
     <>
