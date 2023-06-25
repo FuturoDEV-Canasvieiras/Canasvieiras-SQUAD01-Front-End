@@ -64,6 +64,13 @@ Este projeto foi desenvolvido como parte de um trabalho em equipe. Caso queira c
 - [@Gabriela-Vasco](https://github.com/Gabriela-Vasco)
 - [@gabrielssi](https://github.com/gabrielssi)
 
+### Squard Back-End
+- [@lenaraestudante](https://github.com/lenaraestudante)
+- [@marcosouza1984](https://github.com/marcosouza1984)
+- [@julianoppinheiro](https://github.com/julianoppinheiro)
+- [@josejunior1995](https://github.com/josejunior1995)
+- [@Josiasscheibe](https://github.com/Josiasscheibe)
+
 ## Recursos adicionais
 
 - [React Documentation](https://reactjs.org/docs)
