@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
+import { expect, vi } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import Error from "./Error";
 
@@ -16,6 +16,9 @@ describe("Error", () => {
             <Error />
         </BrowserRouter>
         );
+
+        const title = screen.getByText("Página não encontrada!");
+        expect(title).toBeInTheDocument();
     });
     
 });
