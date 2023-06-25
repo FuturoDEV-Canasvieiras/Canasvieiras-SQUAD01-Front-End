@@ -51,7 +51,7 @@ export default function LoginFormulario( ) {
   return (
     <>
       <div
-        className="d-flex justify-content-center align-items-center full-height"
+        className="d-flex justify-content-center align-items-center"
         style={{ height: "100%" }}
         main="true"
       >
