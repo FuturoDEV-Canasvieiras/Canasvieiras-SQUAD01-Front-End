@@ -29,29 +29,25 @@ export default function CadastroUserForm() {
       return;
     }
 
-    if (usuarios.some((usuario) => usuario.email === form.email)) {
-      alert("Já existe um usuário cadastrado com esse email");
-      return;
-    }
     createData(form)
-      .then((response) => {
-        if (response.status === 200 || 201) {
-          alert("Usuário cadastrado com sucesso!");
-        } else {
-          alert(
-            "Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente."
-          );
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao cadastrar o usuário:", error);
-        alert(
-          "Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente."
-        );
-      });
+    .then((response) => {  
+      if (response.email === form.email) {
+        alert("Usuário cadastrado com sucesso!");
+        navigate("/login");
+      } else {
+        // Lógica para lidar com outros códigos de status de resposta
+        alert("Erro ao cadastrar o usuário: " + response.message);
+      }
+    })
+    .catch((error) => {
+      console.log(error);      
+      alert(
+        "Erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente."
+      );
+    });
+  
+  resetForm();
 
-    resetForm();
-    navigate("/login");
   };
 
   return (
