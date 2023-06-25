@@ -1,5 +1,6 @@
 import { useFetch } from "../../../hooks/useFetch";
-import Rodape from "../../rodape/rodape";
+import { BiSolidCat, BiSolidDog } from "react-icons/bi";
+
 
 export default function ListaDashboard() {
   const animalCategoria = (animal, categoria) => {
@@ -10,53 +11,64 @@ export default function ListaDashboard() {
       return <div>Erro ao carregar os dados do dashboard</div>;
     } else {
       return (
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Total de Itens</h5>
-            <p className="card-text">{itensDash.total}</p>
-            <h5 className="card-title">Antipulgas</h5>
-            <p className="card-text">{itensDash.totalComAntipulgas}</p>
-            <h5 className="card-title">Antiparasitário</h5>
-            <p className="card-text">{itensDash.totalComAntiparasitario}</p>
-            <h5 className="card-title">Kg de Ração</h5>
-            <p className="card-text">{itensDash.mediaRacao}</p>
+
+        <div class="col-12">
+          <h5 class="card-title ml-5">{primeiraMaiscula(categoria)}</h5>
+          <div class="card border-0">
+            <div class="card-body">
+              <div class="card-text d-flex flex-row text-center">
+                <div class="card flex-fill border-0 mr-5"  style={{ minWidth: '150px', maxHeight:'150px' }}>
+                  <div class="card-body">
+                    {animal === "cachorro" ? (<BiSolidDog size={80} /> ) : (<BiSolidCat size={80} />)}
+                  </div>
+                </div>
+                <div class="card flex-fill mr-5" style={{ minWidth: '150px', maxHeight:'150px' }}>
+                  <div class="card-body">
+                    <p class="card-text">Kg de Ração</p>
+                    <h5 class="text-text font-weight-bold">{itensDash.mediaRacao}</h5>
+
+                  </div>
+                </div>
+                <div class="card flex-fill mr-5"  style={{ minWidth: '150px' }}>
+                  <div class="card-body">
+                    <p class="card-text">Antipulgas</p>
+                    <h5 class="text-text font-weight-bold">{itensDash.totalComAntipulgas}</h5>
+
+                  </div>
+                </div>
+                <div class="card flex-fill mr-5" style={{ minWidth: '150px' }}>
+                  <div class="card-body">
+                    <p class="card-text">Antiparasitário</p>
+                    <h5 class="text-text font-weight-bold">{itensDash.totalComAntiparasitario}</h5>
+
+                  </div>
+                </div>
+                <div class="card flex-fill mr-2" style={{ minWidth: '150px' }}>
+                  <div class="card-body">
+                    <p class="card-text">{primeiraMaiscula(animal)}</p>
+                    <h5 class="text-text font-weight-bold">{itensDash.total}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       );
     }
   };
 
+  function primeiraMaiscula(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md-6">
-          <h4 className="p-2 h1-primary">Gato Adulto</h4>
-          <div className="border border-primary">
-            {animalCategoria("gato", "adulto")}
-          </div>
-        </div>
-        <div className="col-md-6">
-          <h4 className="p-2 h1-primary">Gato Filhote</h4>
-          <div className="border border-primary">
-            {animalCategoria("gato", "filhote")}
-          </div>
-        </div>
+      <div class="row">
+        {animalCategoria("cachorro", "filhote")}
+        {animalCategoria("cachorro", "adulto")}
+        {animalCategoria("gato", "filhote")}
+        {animalCategoria("gato", "adulto")}
       </div>
-      <div className="row">
-        <div className="col-md-6">
-          <h4 className="p-2 h1-primary">Cachorro Adulto</h4>
-          <div className="border border-primary">
-            {animalCategoria("cachorro", "adulto")}
-          </div>
-        </div>
-        <div className="col-md-6">
-          <h4 className="p-2 h1-primary">Cachorro Filhote</h4>
-          <div className="border border-primary">
-            {animalCategoria("cachorro", "filhote")}
-          </div>
-        </div>
-      </div>
-      <br />
     </div>
   );
 }
