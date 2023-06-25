@@ -52,6 +52,20 @@ export default function ListaEstoque() {
       });
   }
 
+  function primeiraLetraMaiscula(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  function tipoProduto(string){
+    if(string === "racao"){
+      return "Ração";
+    }else if(string === "antiparasitario"){
+      return "Antiparasitário";
+    }else if(string === "antipulgas"){
+      return "Antipulgas";
+    }
+  }
+
   return (
     <div className="container">
       <table className="table table-striped table-hover">
@@ -87,10 +101,10 @@ export default function ListaEstoque() {
                         <option value="antipulgas">Antipulgas</option>
                       </select>
                     ) : (
-                      item.produto
+                      tipoProduto(item.produto)
                     )}
                   </td>
-                  <td>{item.categoria}</td>
+                  <td>{primeiraLetraMaiscula(item.categoria)}</td>
                   <td>
                     {isEditing ? (
                       <input

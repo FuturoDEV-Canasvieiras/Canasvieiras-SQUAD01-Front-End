@@ -11,7 +11,7 @@ export default function ListaDashboard() {
     } else {
       return (
         <div className="col-12">
-          <h5 className="card-title ml-5">{primeiraMaiscula(categoria)}</h5>
+          <h5 className="card-title ml-5">{primeiraLetraMaiscula(categoria)}</h5>
           <div className="card border-0">
             <div className="card-body">
               <div className="card-text d-flex flex-row text-center">
@@ -56,7 +56,7 @@ export default function ListaDashboard() {
                 </div>
                 <div className="card flex-fill mr-2" style={{ minWidth: "150px" }}>
                   <div className="card-body brilho-dashboard">
-                    <p className="card-text">{primeiraMaiscula(animal)}</p>
+                    <p className="card-text">{primeiraLetraMaiscula(animal)}</p>
                     <h5 className="text-text font-weight-bold">
                       {itensDash.total}
                     </h5>
@@ -70,7 +70,7 @@ export default function ListaDashboard() {
     }
   };
 
-  function primeiraMaiscula(string) {
+  function primeiraLetraMaiscula(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 

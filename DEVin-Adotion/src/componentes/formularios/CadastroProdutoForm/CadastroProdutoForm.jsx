@@ -79,6 +79,10 @@ export default function CadastroProdutoForm() {
     };
   };
 
+  function primeiraLetraMaiscula(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  
   return (
     <div style={{ display: "flex" }}>
       <img src={Cachorro} style={{ height: "500px" }} />
@@ -154,7 +158,7 @@ export default function CadastroProdutoForm() {
               </option>
               {selectedArmazem && (
                 <option value={selectedArmazem.animal}>
-                  {selectedArmazem.animal}
+                  {primeiraLetraMaiscula(selectedArmazem.animal)}
                 </option>
               )}
             </select>
