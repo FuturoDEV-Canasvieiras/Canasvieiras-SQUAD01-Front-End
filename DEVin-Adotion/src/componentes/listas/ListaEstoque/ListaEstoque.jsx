@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useFetch } from "../../../hooks/useFetch";
+import { BsSdCard, BsTrash, BsPencil } from "react-icons/bs";
 
 export default function ListaEstoque() {
     const { itens: produtos, deleteData, updateData } = useFetch(
@@ -50,8 +51,8 @@ export default function ListaEstoque() {
     }
 
     return (
-        <>
-            <table>
+        <div className="container">
+            <table className="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -104,23 +105,32 @@ export default function ListaEstoque() {
                                         {isEditing ? (
                                             <button
                                                 type="button"
+                                                className="btn btn-green"
                                                 onClick={() => handleSave(item.id)}
                                             >
-                                                Salvar
+                                                <BsSdCard
+                                                className="text-white btn-green"
+                                                />
                                             </button>
                                         ) : (
                                             <>
                                                 <button
                                                     type="button"
+                                                    className="btn btn-success"
                                                     onClick={() => handleEdit(item.id)}
                                                 >
-                                                    Editar
+                                                    <BsPencil 
+                                                    className="text-white bg-success"
+                                                    />
                                                 </button>
                                                 <button
                                                     type="button"
+                                                    className="btn btn-danger"
                                                     onClick={() => handleDelete(item.id)}
                                                 >
-                                                    Remover
+                                                    <BsTrash 
+                                                    className="text-white bg-danger"
+                                                    />
                                                 </button>
                                             </>
                                         )}
@@ -133,6 +143,6 @@ export default function ListaEstoque() {
                     )}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }
