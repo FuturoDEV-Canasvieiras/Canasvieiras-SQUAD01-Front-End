@@ -23,8 +23,7 @@ export default function CadastroArmazemForm() {
     }
 
     createData(form)
-    alert("Armazém cadastrado com sucesso!");
-
+    
     resetForm();
   };
 
@@ -45,6 +44,7 @@ export default function CadastroArmazemForm() {
                 onChange={handleChange}
                 minLength={3}
                 placeholder="Nome do armazém"
+                required
               />
             </div>
             <div className="col-md-6 mb-3">
@@ -56,6 +56,7 @@ export default function CadastroArmazemForm() {
                 name="animal"
                 value={form.animal}
                 onChange={handleChange}
+                required
               >
                 <option value="" disabled>
                   Selecione o Estoque

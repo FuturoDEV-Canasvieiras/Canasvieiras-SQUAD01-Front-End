@@ -87,7 +87,7 @@ export default function ListaEstoque() {
                         <option value="antipulgas">Antipulgas</option>
                       </select>
                     ) : (
-                      <td>{item.produto}</td>
+                      item.produto
                     )}
                   </td>
                   <td>{item.categoria}</td>
