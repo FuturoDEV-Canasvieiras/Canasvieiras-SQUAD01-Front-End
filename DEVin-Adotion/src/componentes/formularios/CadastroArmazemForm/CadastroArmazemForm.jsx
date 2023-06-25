@@ -22,7 +22,9 @@ export default function CadastroArmazemForm() {
       return;
     }
 
-    createData(form);
+    createData(form)
+    alert("Armazém cadastrado com sucesso!");
+
     resetForm();
   };
 

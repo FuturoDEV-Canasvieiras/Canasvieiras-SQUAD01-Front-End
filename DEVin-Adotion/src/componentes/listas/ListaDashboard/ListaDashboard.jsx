@@ -34,7 +34,7 @@ export default function ListaDashboard() {
                   <div className="card-body brilho-dashboard">
                     <p className="card-text">Kg de Ração</p>
                     <h5 className="text-text font-weight-bold">
-                      {itensDash.mediaRacao}
+                      {itensDash.totalRacao}
                     </h5>
                   </div>
                 </div>
