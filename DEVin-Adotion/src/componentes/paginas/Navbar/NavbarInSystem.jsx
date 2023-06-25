@@ -15,22 +15,22 @@ export default function NavbarSystem() {
   const nomeUsuario = JSON.parse(localStorage.getItem("userData")).nome;
 
   return (
-      <nav className="navbar navbar-expand-lg navbar-light container-fluid bg-light py-4 ml-4">
-        <Link to="/dashboard" className="navbar-brand">
-          Dev in Adotion
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+    <nav className="navbar navbar-expand-lg navbar-light container-fluid bg-light py-4">
+      <Link to="/dashboard" className="navbar-brand">
+        Dev in Adotion
+      </Link>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link to="/dashboard" className="nav-link">
@@ -52,8 +52,9 @@ export default function NavbarSystem() {
       <div className="d-lg-flex col-lg-3 justify-content-lg-end">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="#">
-              { nomeUsuario ? nomeUsuario : "" }
+            <a className="nav-link
+            font-weight-bold" href="#">
+              Olá, {nomeUsuario ? nomeUsuario : ""}
             </a>
           </li>
           <li className="nav-item">

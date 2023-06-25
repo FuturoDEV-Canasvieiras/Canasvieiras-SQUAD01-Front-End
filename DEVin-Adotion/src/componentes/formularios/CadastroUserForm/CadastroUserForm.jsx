@@ -57,7 +57,7 @@ export default function CadastroUserForm() {
   return (
     <>
       <div
-        className="d-flex justify-content-center align-items-center full-height"
+        className="d-flex justify-content-center align-items-center"
         style={{ height: "100%" }}
       >
         <img

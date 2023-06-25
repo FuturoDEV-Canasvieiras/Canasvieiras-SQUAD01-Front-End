@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 export default function NavbarPadrao() {
     return (
         <div>
-          <nav className="navbar navbar-expand-lg navbar-light container-fluid py-4 ml-4">
+          <nav className="navbar navbar-expand-lg navbar-light container-fluid py-4">
             <Link to="/login" className="navbar-brand">
               Dev in Adotion
             </Link>
