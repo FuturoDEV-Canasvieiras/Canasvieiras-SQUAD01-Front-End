@@ -150,7 +150,7 @@ export default function ArmazemPagina() {
                           onClick={() => handleSave(item.id)}
                           className="btn btn-green"
                         >
-                          <BsSdCard className="text-white btn-green" />
+                          <BsSdCard className="text-white btn-green" title="Salvar" />
                         </button>
                       ) : (
                         <>
@@ -159,7 +159,7 @@ export default function ArmazemPagina() {
                             className="btn btn-success"
                             onClick={() => handleEdit(item.id)}
                           >
-                            <BsPencil className="text-white bg-success" />
+                            <BsPencil className="text-white bg-success" title="Editar" />
                           </button>
                           {item.situacao === true ? (
                             <button
@@ -167,7 +167,7 @@ export default function ArmazemPagina() {
                               className="btn btn-danger"
                               onClick={() => handleToggleStatus(item.id)}
                             >
-                              <BsTrash className="text-white bg-danger" />
+                              <BsTrash className="text-white bg-danger" title="Desativar"/>
                             </button>
                           ) : (
                             <button
