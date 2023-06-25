@@ -31,6 +31,19 @@ export default function ArmazemPagina() {
       nome: nomeElement.value,
       animal: animalElement.value,
     };
+
+    // Verifica se o nome do armazém está vazio ou em branco
+    if (nomeElement.value.trim().length === 0) {
+      alert("O nome do armazém não pode ser vazio ou em branco");
+      return;
+    }
+
+    // Verifica se já existe um armazém com o mesmo nome
+    if (armazensList.some((item) => item.nome === nomeElement.value && item.id !== id)) {
+      alert("Já existe um armazém cadastrado com esse nome");
+      return;
+    }
+
     updateData(id, updatedArmazem)
       .then(() => {
         setEditingItemId(null);
@@ -85,115 +98,115 @@ export default function ArmazemPagina() {
         <CadastroArmazemForm />
 
         <h2 className="col-12 py-3">Lista de Armazéns</h2>
-        
+
         <div className="container">
-        <table className="table table-striped table-hover">
+          <table className="table table-striped table-hover">
 
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome do Armazém</th>
-              <th>Animal</th>
-              <th>Situação</th>
-              <th>Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-            {armazensList ? (
-              armazensList.map((item) => {
-                const isEditing = item.id === editingItemId;
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome do Armazém</th>
+                <th>Animal</th>
+                <th>Situação</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              {armazensList ? (
+                armazensList.map((item) => {
+                  const isEditing = item.id === editingItemId;
 
-                return (
-                  <tr key={item.id}>
-                    <th>{item.id}</th>
-                    {isEditing ? (
-                      <td>
-                        <input
-                          id={`nome-${item.id}`}
-                          defaultValue={item.nome}
-                          type="text"
-                          className="form-control"
-                        />
-                      </td>
-                    ) : (
-                      <td>{item.nome}</td>
-                    )}
-                    {isEditing ? (
-                      <td>
-                        <select
-                          id={`animal-${item.id}`}
-                          defaultValue={item.animal}
-                          className="form-control"
-                        >
-                          <option value="gato">
-                            Gato
-                          </option>
-                          <option value="cachorro">
-                            Cachorro
-                          </option>
-                        </select>
-                      </td>
-                    ) : (
-                      <td>
-                        {item.animal === "gato" ? (
-                          <BiSolidCat size={30} />
-                        ) : (
-                          <BiSolidDog size={30} />
-                        )}
-                      </td>
-                    )}
-                    <td>{item.situacao ? "Disponivel" : "Indisponivel"}</td>
-                    <td>
+                  return (
+                    <tr key={item.id}>
+                      <th>{item.id}</th>
                       {isEditing ? (
-                        <button
-                          type="button"
-                          onClick={() => handleSave(item.id)}
-                          className="btn btn-green"
-                        >
-                          <BsSdCard className="text-white btn-green" title="Salvar" />
-                        </button>
+                        <td>
+                          <input
+                            id={`nome-${item.id}`}
+                            defaultValue={item.nome}
+                            type="text"
+                            className="form-control"
+                          />
+                        </td>
                       ) : (
-                        <>
+                        <td>{item.nome}</td>
+                      )}
+                      {isEditing ? (
+                        <td>
+                          <select
+                            id={`animal-${item.id}`}
+                            defaultValue={item.animal}
+                            className="form-control"
+                          >
+                            <option value="gato">
+                              Gato
+                            </option>
+                            <option value="cachorro">
+                              Cachorro
+                            </option>
+                          </select>
+                        </td>
+                      ) : (
+                        <td>
+                          {item.animal === "gato" ? (
+                            <BiSolidCat size={30} />
+                          ) : (
+                            <BiSolidDog size={30} />
+                          )}
+                        </td>
+                      )}
+                      <td>{item.situacao ? "Disponivel" : "Indisponivel"}</td>
+                      <td>
+                        {isEditing ? (
                           <button
                             type="button"
-                            className="btn btn-success"
-                            onClick={() => handleEdit(item.id)}
+                            onClick={() => handleSave(item.id)}
+                            className="btn btn-green"
                           >
-                            <BsPencil className="text-white bg-success" title="Editar" />
+                            <BsSdCard className="text-white btn-green" title="Salvar" />
                           </button>
-                          {item.situacao === true ? (
+                        ) : (
+                          <>
                             <button
                               type="button"
-                              className="btn btn-danger"
-                              onClick={() => handleToggleStatus(item.id)}
+                              className="btn btn-success"
+                              onClick={() => handleEdit(item.id)}
                             >
-                              <BsTrash className="text-white bg-danger" title="Desativar"/>
+                              <BsPencil className="text-white bg-success" title="Editar" />
                             </button>
-                          ) : (
-                            <button
-                              type="button"
-                              className="btn btn-danger"
-                              //leganda
-                              title="Não é possível excluir um armazém indisponível"
-                              disabled
-                            >
-                              <BsTrash className="text-white bg-danger" />
-                            </button>
-                          )}
-                        </>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })
-            ) : (
-              <tr>
-                <td colSpan={5}>Nenhum armazém cadastrado ainda</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+                            {item.situacao === true ? (
+                              <button
+                                type="button"
+                                className="btn btn-danger"
+                                onClick={() => handleToggleStatus(item.id)}
+                              >
+                                <BsTrash className="text-white bg-danger" title="Desativar" />
+                              </button>
+                            ) : (
+                              <button
+                                type="button"
+                                className="btn btn-danger"
+                                //leganda
+                                title="Não é possível excluir um armazém indisponível"
+                                disabled
+                              >
+                                <BsTrash className="text-white bg-danger" />
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan={5}>Nenhum armazém cadastrado ainda</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
