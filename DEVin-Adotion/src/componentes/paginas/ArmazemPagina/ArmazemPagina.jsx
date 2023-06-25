@@ -83,13 +83,13 @@ export default function ArmazemPagina() {
         </header>
 
         <CadastroArmazemForm />
-        <br />
 
+        <h2 className="col-12 py-3">Lista de Armazéns</h2>
+        
+        <div className="container">
         <table className="table table-striped table-hover">
+
           <thead>
-            <br />
-            <h2 className="ml-3">Lista de Armazéns</h2>
-            <br />
             <tr>
               <th>ID</th>
               <th>Nome do Armazém</th>
@@ -193,6 +193,7 @@ export default function ArmazemPagina() {
             )}
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   );
