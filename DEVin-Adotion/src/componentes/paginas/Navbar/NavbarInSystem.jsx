@@ -15,7 +15,7 @@ export default function NavbarSystem() {
   const nomeUsuario = JSON.parse(localStorage.getItem("userData")).nome;
 
   return (
-      <nav className="navbar navbar-expand-lg navbar-light container-fluid bg-light py-4">
+      <nav className="navbar navbar-expand-lg navbar-light container-fluid bg-light py-4 ml-4">
         <Link to="/dashboard" className="navbar-brand">
           Dev in Adotion
         </Link>

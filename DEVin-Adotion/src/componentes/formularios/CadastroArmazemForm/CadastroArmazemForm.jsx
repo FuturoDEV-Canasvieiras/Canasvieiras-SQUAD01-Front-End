@@ -29,7 +29,6 @@ export default function CadastroArmazemForm() {
   return (
     <div style={{ display: "flex", justifyContent: "left" }}>
       <div className="form-container col-12">
-        <h1>Cadastro Armazém</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="nome" className="form-label">
@@ -76,6 +75,8 @@ export default function CadastroArmazemForm() {
           </button>
         </div>
       </div>
+      <br />
     </div>
+    
   );
 }
