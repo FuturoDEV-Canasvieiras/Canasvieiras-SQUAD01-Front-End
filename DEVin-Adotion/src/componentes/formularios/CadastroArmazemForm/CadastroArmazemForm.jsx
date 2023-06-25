@@ -61,10 +61,10 @@ export default function CadastroArmazemForm() {
               <option value="cachorro">Cachorro</option>
             </select>
           </div>
-        </form>
+        
         <div className="text-right">
           <button
-            type="submit"
+            type="button"
             className="btn btn-outline-danger mr-2"
             onClick={resetForm}
           >
@@ -74,6 +74,7 @@ export default function CadastroArmazemForm() {
             Cadastrar
           </button>
         </div>
+        </form>
       </div>
       <br />
     </div>
