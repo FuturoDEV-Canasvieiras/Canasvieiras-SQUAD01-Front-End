@@ -102,3 +102,11 @@
 footer {
   background-color: ghostwhite;
 }
+
+a {
+  color: #2499ae;
+}
+
+a:hover {
+  color: #1c8294;
+}
