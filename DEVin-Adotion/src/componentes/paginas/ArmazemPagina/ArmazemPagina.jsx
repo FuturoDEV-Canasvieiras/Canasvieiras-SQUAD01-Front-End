@@ -126,10 +126,10 @@ export default function ArmazemPagina() {
                           className="form-control"
                         >
                           <option value="gato">
-                            <BiSolidCat />
+                            Gato
                           </option>
                           <option value="cachorro">
-                            <BiSolidDog />
+                            Cachorro
                           </option>
                         </select>
                       </td>
