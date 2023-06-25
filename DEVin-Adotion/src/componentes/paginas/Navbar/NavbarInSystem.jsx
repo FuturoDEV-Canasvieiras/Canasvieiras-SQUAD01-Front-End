@@ -1,20 +1,22 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import {
-  CadastroProdutoPagina,
-  ArmazemPagina,
-  Dashboard,
-  Error,
-  LoginPagina,
-  EstoquePagina,
-  CadastroUserPagina,
-} from "..";
+import { useAuthentication } from "../../../hooks/useAuthentication";
 
 export default function NavbarSystem() {
+  const { logout } = useAuthentication();
+
+
+  const handleSubmitSair = (event) => {
+    event.preventDefault();
+    logout();
+    window.location.href = "/login"; // redireciona para a página de login
+  };
+
+  const nomeUsuario = JSON.parse(localStorage.getItem("userData")).nome;
+
   return (
-    <Router>
       <nav className="navbar navbar-expand-lg navbar-light container-fluid bg-light py-4">
-        <Link to="/login" className="navbar-brand">
+        <Link to="/dashboard" className="navbar-brand">
           Dev in Adotion
         </Link>
         <button
@@ -29,47 +31,38 @@ export default function NavbarSystem() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/dashboard" className="nav-link">
-                Dashboard
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/cadastro-produtos" className="nav-link">
-                Cadastro Produtos
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/cadastro-armazem" className="nav-link">
-                Armazém
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/produtos-estoque" className="nav-link">
-                Produtos Estoque
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <div className="container mt-4">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/produtos-estoque" element={<EstoquePagina />} />
-          <Route
-            path="/cadastro-produtos"
-            element={<CadastroProdutoPagina />}
-          />
-          <Route path="/*" element={<Error />} />
-          <Route path="/cadastro-armazem" element={<ArmazemPagina />} />
-          <Route path="/*" element={<Error />} />
-          <Route path="/login" element={<LoginPagina />} />
-          <Route path="/cadastro-usuario" element={<CadastroUserPagina />} />
-        </Routes>
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="/dashboard" className="nav-link">
+              Dashboard
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/produtos-estoque" className="nav-link">
+              Estoque
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/cadastro-armazem" className="nav-link ">
+              Armazém
+            </Link>
+          </li>
+        </ul>
       </div>
-    </Router>
+      <div className="d-lg-flex col-lg-3 justify-content-lg-end">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <a className="nav-link" href="#">
+              { nomeUsuario ? nomeUsuario : "" }
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#" onClick={handleSubmitSair}>
+              Sair
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 }

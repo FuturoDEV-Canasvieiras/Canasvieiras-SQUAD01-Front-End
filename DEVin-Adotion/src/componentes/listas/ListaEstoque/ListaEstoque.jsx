@@ -50,8 +50,8 @@ export default function ListaEstoque() {
     }
 
     return (
-        <>
-            <table>
+        <div className="container">
+            <table className="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -133,6 +133,6 @@ export default function ListaEstoque() {
                     )}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }

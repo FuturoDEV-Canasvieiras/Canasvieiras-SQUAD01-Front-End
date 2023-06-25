@@ -6,13 +6,14 @@ import LoginPagina from "./LoginPagina/LoginPagina"
 import Error from "../paginas/Error/Error"
 import NavbarSystem from "./Navbar/NavbarInSystem"
 import EstoquePagina from "./EstoquePagina/EstoquePagina"
+import NavbarPadrao from "./Navbar/NavbarPadrao"
 
 export {
     CadastroUserPagina,
     CadastroProdutoPagina,
     ArmazemPagina,
     Dashboard,
-    LoginPagina, NavbarSystem,
+    LoginPagina, NavbarSystem, NavbarPadrao,
     Error,
     EstoquePagina
 }
